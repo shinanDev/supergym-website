@@ -64,11 +64,25 @@
   </main>
 
 
-  <!-- ============================================================
-       PLACEHOLDER: FOOTER — Vasilji
-       Aufgabe: Footer mit Links, Kontaktinfos, Social-Media-Icons
-       und Copyright-Zeile.
-       ============================================================ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        SUPER<span class="footer__brand--accent">GYM</span>
+      </div>
+      <nav class="footer__nav">
+        <a href="{{ url_for('index') }}" class="footer__link">Home</a>
+        <a href="{{ url_for('kurse') }}" class="footer__link">Kurse</a>
+        <a href="{{ url_for('ueber_uns') }}" class="footer__link">Über uns</a>
+      </nav>
+      <div class="footer__legal">
+        <a href="#" class="footer__link">Impressum</a>
+        <a href="#" class="footer__link">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer__copy">
+      © 2026 SuperGym Hamburg
+    </div>
+  </footer>
   {% block footer %}{% endblock %}
 
 
