@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SuperGym — Highlights</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:     #0D0D0D;
+      --yellow:    #F5FF40;
+      --offwhite:  #F7F7F7;
+      --darkgray:  #1A1A1A;
+      --lightgray: #E0E0E0;
+      --font: 'Inter', sans-serif;
+    }
+    body {
+      background: var(--offwhite);
+      font-family: var(--font);
+      color: var(--darkgray);
+      padding: 56px 24px;
+    }
+    .section { max-width: 900px; margin: 0 auto; }
+
+    /* WRAPPER */
+    .carousel-wrap {
+      border: 1.5px solid var(--black);
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    /* ── FOTO BEREICH ── */
+    .photo-area {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+    }
+
+    .photo-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+    }
+
+    .photo-slide {
+      min-width: 100%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+    .photo-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      filter: brightness(0.85);
+      transition: transform 0.6s ease;
+    }
+    .photo-slide.active img { transform: scale(1.04); }
+
+    /* Badge oben links */
+    .photo-badge {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--yellow); color: var(--black);
+      font-size: 10px; font-weight: 900;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 5px 10px; z-index: 2;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+    }
+    .progress-fill {
+      height: 100%; width: 0%;
+      background: var(--yellow);
+    }
+
+    /* ── TEXT BEREICH ── */
+    .text-area {
+      padding: 36px 40px 40px;
+      background: var(--black);
+      color: var(--offwhite);
+      position: relative;
+    }
+
+    /* Text slides: nur aktiver sichtbar */
+    .text-slide { display: none; }
+    .text-slide.active { display: block; }
+
+    .text-tag {
+      font-size: 10px; font-weight: 900;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 14px;
+    }
+    .text-title {
+      font-size: 28px; font-weight: 900;
+      text-transform: uppercase; line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .text-body {
+      font-size: 15px; line-height: 1.65;
+      color: rgba(247,247,247,0.65);
+    }
+
+    /* ── CONTROLS ── */
+    .controls {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin-top: 28px;
+    }
+
+    .dots { display: flex; gap: 8px; }
+    .dot {
+      width: 28px; height: 3px;
+      background: rgba(255,255,255,0.2);
+      border: none; cursor: pointer;
+      transition: width 0.3s, background 0.3s;
+    }
+    .dot.active {
+      width: 48px; background: var(--yellow);
+      outline: 1px solid rgba(0,0,0,0.2);
+    }
+
+    .counter {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(247,247,247,0.35);
+    }
+    .counter strong { color: var(--offwhite); font-size: 16px; }
+
+    .arrows { display: flex; gap: 6px; }
+    .arr {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.08);
+      color: var(--yellow);
+      border: 1px solid rgba(255,255,255,0.12);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .arr:hover { background: var(--yellow); color: var(--black); }
+    .arr svg { width: 16px; height: 16px; }
+
+    @media (max-width: 600px) {
+      .text-area { padding: 28px 24px 32px; }
+      .controls { padding: 20px 24px 0; }
+      .text-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+<section class="section">
+
+  <div class="carousel-wrap" id="carousel">
+
+    <!-- FOTOS -->
+    <div class="photo-area">
+      <div class="photo-track" id="photoTrack">
+        <div class="photo-slide active">
+          <img src="C:\Users\IsabelleStriewski\Desktop\Supergym\supergym-website\static\images\highlight-kurse.png" alt="Kurse" />
+        </div>
+        <div class="photo-slide">
+          <img src="C:\Users\IsabelleStriewski\Desktop\Supergym\supergym-website\static\images\highlight-trainer.png" alt="Trainer" />
+        </div>
+        <div class="photo-slide">
+          <img src="C:\Users\IsabelleStriewski\Desktop\Supergym\supergym-website\static\images\highlight-zeiten.png" alt="Zeiten" />
+        </div>
+        <div class="photo-slide">
+          <img src="C:\Users\IsabelleStriewski\Desktop\Supergym\supergym-website\static\images\highlight-community.png" alt="Community" />
+        </div>
+      </div>
+      <div class="photo-badge" id="badge">01 — 04</div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-bar">
+      <div class="progress-fill" id="progFill"></div>
+    </div>
+
+    <!-- TEXTE -->
+    <div class="text-area">
+
+      <div class="text-slide active">
+        <div class="text-tag">01 — Kursvielfalt</div>
+        <div class="text-title">Über 20 Kurse pro Woche</div>
+        <div class="text-body">Von Yoga über Krafttraining bis HIIT — unser Kursplan bietet für jedes Level das passende Programm. Jeden Tag, jede Woche.</div>
+      </div>
+
+      <div class="text-slide">
+        <div class="text-tag">02 — Trainer</div>
+        <div class="text-title">Zertifizierte Trainer</div>
+        <div class="text-body">Unsere Trainer sind lizenziert, erfahren und motiviert. Individuelle Betreuung ist bei uns kein Upgrade, sondern Standard.</div>
+      </div>
+
+      <div class="text-slide">
+        <div class="text-tag">03 — Öffnungszeiten</div>
+        <div class="text-title">Trainiere wann du willst</div>
+        <div class="text-body">Kurse von morgens bis abends, 6 Tage die Woche. Dein Zeitplan bestimmt dein Training — nicht umgekehrt.</div>
+      </div>
+
+      <div class="text-slide">
+        <div class="text-tag">04 — Community</div>
+        <div class="text-title">Mehr als ein Gym</div>
+        <div class="text-body">Bei SuperGym trainierst du nicht allein. Unsere Community pusht sich gegenseitig — respektvoll, motiviert und auf Augenhöhe.</div>
+      </div>
+
+      <div class="controls">
+        <div class="dots" id="dots"></div>
+        <div class="counter"><strong id="curNum">01</strong> / 04</div>
+        <div class="arrows">
+          <button class="arr" id="prev" aria-label="Zurück">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="arr" id="next" aria-label="Weiter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<script>
+  const photoTrack = document.getElementById('photoTrack');
+  const photoSlides = photoTrack.querySelectorAll('.photo-slide');
+  const textSlides  = document.querySelectorAll('.text-slide');
+  const dotsEl  = document.getElementById('dots');
+  const badge   = document.getElementById('badge');
+  const curNum  = document.getElementById('curNum');
+  const prog    = document.getElementById('progFill');
+  const N = photoSlides.length;
+  const DELAY = 5000;
+  let cur = 0, timer;
+
+  // Build dots
+  for (let i = 0; i < N; i++) {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i===0?' active':'');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  }
+
+  function goTo(n) {
+    photoSlides[cur].classList.remove('active');
+    textSlides[cur].classList.remove('active');
+    dotsEl.children[cur].classList.remove('active');
+
+    cur = (n + N) % N;
+
+    photoSlides[cur].classList.add('active');
+    textSlides[cur].classList.add('active');
+    dotsEl.children[cur].classList.add('active');
+    photoTrack.style.transform = `translateX(-${cur * 100}%)`;
+    badge.textContent   = String(cur+1).padStart(2,'0') + ' — 04';
+    curNum.textContent  = String(cur+1).padStart(2,'0');
+
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearTimeout(timer);
+    prog.style.transition = 'none';
+    prog.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      prog.style.transition = `width ${DELAY}ms linear`;
+      prog.style.width = '100%';
+    }));
+    timer = setTimeout(() => goTo(cur + 1), DELAY);
+  }
+
+  document.getElementById('prev').addEventListener('click', () => goTo(cur-1));
+  document.getElementById('next').addEventListener('click', () => goTo(cur+1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowLeft')  goTo(cur-1);
+    if (e.key==='ArrowRight') goTo(cur+1);
+  });
+
+  let tx = 0;
+  photoTrack.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+  photoTrack.addEventListener('touchend',   e => {
+    const d = e.changedTouches[0].clientX - tx;
+    if (Math.abs(d) > 40) goTo(cur + (d<0?1:-1));
+  });
+
+  const wrap = document.getElementById('carousel');
+  wrap.addEventListener('mouseenter', () => { clearTimeout(timer); prog.style.transition='none'; });
+  wrap.addEventListener('mouseleave', resetTimer);
+
+  resetTimer();
+</script>
+</body>
+</html>
