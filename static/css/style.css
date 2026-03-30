@@ -1,7 +1,7 @@
-/* ============================================================
+/* =====================================================
    SUPERGYM — Global Stylesheet
    Corporate Identity: schwarz / neongelb / weiß
-   ============================================================ */
+   ===================================================== */
 
 
 /* ------------------------------------------------------------
@@ -406,9 +406,9 @@ ul {
   }
 }
 
-/* ============================================================
+/* =====================================================
    HEADER / HERO
-   ============================================================ */
+   ===================================================== */
 .hero {
   width: 100%;
   min-height: 500px;
@@ -521,7 +521,138 @@ ul {
 }
 
 /* ------------------------------------------------------------
+
    12. KARUSSELL / GRID-BREITE
+
+   12. ABOUT — STANDORT & KARTE (US-07)
+   ------------------------------------------------------------ */
+.location {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.location__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.location__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.location__headline {
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--color-subtle);
+  line-height: 1.05;
+}
+
+/* Zweispaltiges Layout: Info links, Karte rechts */
+.location__body {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: var(--gap);
+  align-items: start;
+}
+
+/* Adress-Block */
+.location__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #1A1A1A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--color-accent);
+}
+
+.location__address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.location__address-name {
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+}
+
+.location__address-line {
+  font-size: 0.9375rem;
+  color: var(--color-subtle);
+  line-height: 1.6;
+}
+
+/* Meta-Infos (U-Bahn, S-Bahn, Parking) */
+.location__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.location__meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.location__meta-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(224, 224, 224, 0.45);
+  white-space: nowrap;
+}
+
+.location__meta-value {
+  font-size: 0.875rem;
+  color: var(--color-subtle);
+  text-align: right;
+}
+
+/* Karte */
+.location__map-wrap {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Karte leicht desaturieren — passend zum dunklen CI */
+  filter: grayscale(30%) contrast(1.05);
+}
+
+.location__map {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Responsive: untereinander ab Tablet */
+@media (max-width: 900px) {
+  .location__body {
+    grid-template-columns: 1fr;
+  }
+
+  .location__map-wrap {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ------------------------------------------------------------
+   13. KARUSSELL / FULL WIDTH BEREICH
    ------------------------------------------------------------ */
 .carousel-container {
   width: 100%;

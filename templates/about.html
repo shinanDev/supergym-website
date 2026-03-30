@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Über uns — SuperGym Hamburg{% endblock %}
+
+
+{% block content %}
+
+  <!-- ============================================================
+       PLACEHOLDER: GYM-GESCHICHTE — Vasilji
+       Aufgabe: Abschnitt mit der Geschichte/Story des SuperGyms.
+       z.B. Gründungsjahr, Motivation, Werte — Bild + Text-Block.
+       ============================================================ -->
+
+
+  <!-- ============================================================
+       PLACEHOLDER: ÖFFNUNGSZEITEN — Bousaina
+       Aufgabe: Tabelle oder Grid mit Öffnungszeiten (Mo–So).
+       CI: dunkler Hintergrund, Akzentfarbe für aktuelle Tags.
+       ============================================================ -->
+
+
+  <!-- ============================================================
+       PLACEHOLDER: TRAINER — Isabel
+       Aufgabe: Trainer-Karten (Foto + Name + Spezialgebiet).
+       Grid-Layout, 3–4 Karten, konsistent mit CI.
+       ============================================================ -->
+
+
+  <!-- ============================================================
+       US-07: STANDORT & KARTE
+       ============================================================ -->
+  <section class="location">
+
+    <div class="location__header">
+      <span class="location__label">Wo wir sind</span>
+      <h2 class="location__headline">So findest du uns</h2>
+    </div>
+
+    <div class="location__body">
+
+      <!-- Adress-Block -->
+      <div class="location__info">
+        <div class="location__address">
+          <span class="location__address-name">SuperGym Hamburg</span>
+          <span class="location__address-line">Große Bergstraße 228</span>
+          <span class="location__address-line">22767 Hamburg-Altona</span>
+        </div>
+
+        <div class="location__meta">
+          <div class="location__meta-item">
+            <span class="location__meta-label">U-Bahn</span>
+            <span class="location__meta-value">U3 — Altona</span>
+          </div>
+          <div class="location__meta-item">
+            <span class="location__meta-label">S-Bahn</span>
+            <span class="location__meta-value">S1, S3 — Altona</span>
+          </div>
+          <div class="location__meta-item">
+            <span class="location__meta-label">Parking</span>
+            <span class="location__meta-value">Straßenparkplätze vorhanden</span>
+          </div>
+        </div>
+
+        <a
+          href="https://maps.google.com/?q=Große+Bergstraße+228,+22767+Hamburg"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--primary"
+        >Route planen</a>
+      </div>
+
+      <!-- Google Maps Embed -->
+      <!-- HINWEIS: URL mit echter Google Maps Place-ID ersetzen für Produktion -->
+      <div class="location__map-wrap">
+        <iframe
+          class="location__map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2370.5!2d9.935!3d53.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDMzJzAwLjAiTiA5wrA1NicwNi4wIkU!5e0!3m2!1sde!2sde"
+          width="100%"
+          height="100%"
+          style="border: 0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="SuperGym Hamburg — Große Bergstraße 228, 22767 Hamburg-Altona"
+        ></iframe>
+      </div>
+
+    </div>
+  </section>
+
+{% endblock %}

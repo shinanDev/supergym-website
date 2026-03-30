@@ -14,6 +14,7 @@ def kurse():
 
 
 @app.route("/ueber-uns")
+@app.route("/about")
 def ueber_uns():
     return render_template("about.html")
 
