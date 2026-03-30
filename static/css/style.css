@@ -521,12 +521,11 @@ ul {
 }
 
 /* ------------------------------------------------------------
-   12. KARUSSELL / FULL WIDTH BEREICH
+   12. KARUSSELL / GRID-BREITE
    ------------------------------------------------------------ */
 .carousel-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  overflow: hidden;
+  width: 100%;
+  max-width: var(--max-width); /* Begrenzt auf 1200px, genau wie der Rest */
+  margin: clamp(2rem, 5vw, 4rem) auto 0 auto; /* Zentriert & Abstand nach oben */
+  padding-inline: var(--gap); /* Gleiche Seitenabstände wie der Rest */
 }
