@@ -408,3 +408,92 @@ ul {
     grid-template-columns: 1fr;
   }
 }
+/* ------------------------------------------------------------
+   12. GYM-GESCHICHTE / HISTORY
+   ------------------------------------------------------------ */
+.history {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: clamp(3rem, 6vw, 5rem) var(--gap);
+}
+
+.history__inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.history__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.history__headline {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: var(--color-background);
+  margin-bottom: 1.25rem;
+}
+
+.history__text {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-subtle);
+  max-width: 60ch;
+}
+
+.history__timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-left: 2px solid var(--color-accent);
+  padding-left: 2rem;
+}
+
+.history__milestone {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-block: 1.25rem;
+  position: relative;
+}
+
+.history__dot {
+  position: absolute;
+  left: -2.45rem;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.history__year {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--color-accent);
+  letter-spacing: 0.04em;
+  min-width: 4rem;
+}
+
+.history__event {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-background);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .history__timeline {
+    padding-left: 1.25rem;
+  }
+}
