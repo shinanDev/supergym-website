@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}SuperGym{% endblock %}</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+  <!-- ============================================================
+       PLACEHOLDER: HEADER — Bousaina
+       Aufgabe: Hero-Banner / Fullscreen-Header mit Bild und
+       Overlay-Text. Wird oberhalb der Navigation eingebettet.
+       ============================================================ -->
+
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="navbar__logo">
+      SUPER<span class="navbar__logo--accent">GYM</span>
+    </a>
+
+    <!-- Hamburger Button (Mobile) -->
+    <button class="navbar__toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+    </button>
+
+    <ul class="navbar__links" id="navLinks">
+      <li><a href="{{ url_for('index') }}" class="navbar__link {% if request.endpoint == 'index' %}navbar__link--active{% endif %}">Home</a></li>
+      <li><a href="{{ url_for('kurse') }}" class="navbar__link {% if request.endpoint == 'kurse' %}navbar__link--active{% endif %}">Kurse</a></li>
+      <li><a href="{{ url_for('ueber_uns') }}" class="navbar__link {% if request.endpoint == 'ueber_uns' %}navbar__link--active{% endif %}">Über uns</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ============================================================
+       PLACEHOLDER: KARUSSELL — Isabel
+       Aufgabe: Bild-Slider / Karussell mit 3–5 Slides. Jeder
+       Slide enthält ein Fullwidth-Bild mit kurzem Claim-Text.
+       Positioniert direkt unterhalb der Navigation.
+       ============================================================ -->
+  {% block karussell %}{% endblock %}
+
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+
+
+  <!-- ============================================================
+       PLACEHOLDER: FOOTER — Vasilji
+       Aufgabe: Footer mit Links, Kontaktinfos, Social-Media-Icons
+       und Copyright-Zeile.
+       ============================================================ -->
+  {% block footer %}{% endblock %}
+
+
+  <!-- Global JS -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+
+</body>
+</html>

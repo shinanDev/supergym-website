@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}SuperGym — Train Hard. Stay Sharp.{% endblock %}
+
+
+<!-- ============================================================
+     BODY — Hauptinhalt der Startseite
+     ============================================================ -->
+{% block content %}
+
+  <!-- -------------------------------------------------------
+       SEKTION 1: Feature-Block (Foto links + Text rechts)
+       ------------------------------------------------------- -->
+  <section class="feature">
+    <div class="feature__image-wrap">
+      <!-- Platzhalterbild bis echtes Asset vorhanden -->
+      <img
+        src="{{ url_for('static', filename='images/feature-main.jpg') }}"
+        alt="Trainingsbereich SuperGym"
+        class="feature__image"
+        onerror="this.style.background='#0D0D0D';this.removeAttribute('src')"
+      />
+    </div>
+
+    <div class="feature__content">
+      <span class="feature__label">Dein Training. Deine Regeln.</span>
+      <h1 class="feature__headline">
+        TRAIN HARD.<br />
+        <span class="accent">STAY SHARP.</span>
+      </h1>
+      <p class="feature__text">
+        Im SuperGym findest du alles, was du brauchst, um deine Ziele zu erreichen —
+        modernste Geräte, erfahrene Trainer und eine Community, die dich pushes.
+      </p>
+      <a href="{{ url_for('kurse') }}" class="btn btn--primary">Kurse entdecken</a>
+    </div>
+  </section>
+
+
+  <!-- -------------------------------------------------------
+       SEKTION 2: Zwei-Spalten-Grid (Foto/Text Blöcke)
+       ------------------------------------------------------- -->
+  <section class="grid-section">
+
+    <!-- Block A -->
+    <article class="grid-card">
+      <div class="grid-card__image-wrap">
+        <img
+          src="{{ url_for('static', filename='images/card-strength.jpg') }}"
+          alt="Krafttraining"
+          class="grid-card__image"
+          onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
+        />
+      </div>
+      <div class="grid-card__body">
+        <h2 class="grid-card__title">Krafttraining</h2>
+        <p class="grid-card__text">
+          Freihanteln, Maschinen und Racks — unser Gerätepark bietet alles
+          für Einsteiger und Fortgeschrittene.
+        </p>
+        <a href="{{ url_for('kurse') }}" class="btn btn--ghost">Mehr erfahren</a>
+      </div>
+    </article>
+
+    <!-- Block B -->
+    <article class="grid-card">
+      <div class="grid-card__image-wrap">
+        <img
+          src="{{ url_for('static', filename='images/card-cardio.jpg') }}"
+          alt="Cardio & Ausdauer"
+          class="grid-card__image"
+          onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
+        />
+      </div>
+      <div class="grid-card__body">
+        <h2 class="grid-card__title">Cardio &amp; Ausdauer</h2>
+        <p class="grid-card__text">
+          Laufbänder, Bikes und Rudergeräte — steiger deine Ausdauer und
+          verbrenne Kalorien effizient.
+        </p>
+        <a href="{{ url_for('kurse') }}" class="btn btn--ghost">Mehr erfahren</a>
+      </div>
+    </article>
+
+  </section>
+
+{% endblock %}
