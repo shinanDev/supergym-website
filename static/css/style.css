@@ -408,3 +408,46 @@ ul {
     grid-template-columns: 1fr;
   }
 }
+/* ============================================================
+   HEADER / HERO
+   ============================================================ */
+.hero {
+  width: 100%;
+  min-height: 500px;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__overlay {
+  text-align: center;
+  padding: 40px;
+}
+
+.hero__title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #F5FF40;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero__title span {
+  color: #F5FF40;
+}
+
+.hero__sub {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 32px;
+}
+
+.hero__btn {
+  background-color: #F5FF40;
+  color: #000000;
+  padding: 14px 32px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
