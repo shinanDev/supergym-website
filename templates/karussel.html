@@ -19,15 +19,23 @@
       background: var(--offwhite);
       font-family: var(--font);
       color: var(--darkgray);
+      /* Das Padding bleibt erhalten, damit der Abstand nach oben/unten stimmt */
       padding: 56px 24px;
     }
-    .section { max-width: 900px; margin: 0 auto; }
+    
+    /* HIER WURDE DIE ÄNDERUNG VORGENOMMEN */
+    .section { 
+      width: 100%; /* Nimmt jetzt die volle Breite des Layouts ein */
+      margin: 0 auto; 
+      /* max-width: 900px; <-- Diese Blockade wurde entfernt! */
+    }
 
     /* WRAPPER */
     .carousel-wrap {
       border: 1.5px solid var(--black);
       overflow: hidden;
       background: var(--black);
+      width: 100%; /* Stellt sicher, dass das Karussell den neuen Platz auch nutzt */
     }
 
     /* ── FOTO BEREICH ── */
@@ -155,7 +163,6 @@
 
   <div class="carousel-wrap" id="carousel">
 
-    <!-- FOTOS -->
     <div class="photo-area">
       <div class="photo-track" id="photoTrack">
         <div class="photo-slide active">
@@ -174,12 +181,10 @@
       <div class="photo-badge" id="badge">01 — 04</div>
     </div>
 
-    <!-- PROGRESS BAR -->
     <div class="progress-bar">
       <div class="progress-fill" id="progFill"></div>
     </div>
 
-    <!-- TEXTE -->
     <div class="text-area">
 
       <div class="text-slide active">

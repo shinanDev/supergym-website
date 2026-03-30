@@ -5,61 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}SuperGym{% endblock %}</title>
 
-  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
 
-  <!-- Global Stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 
-  {% block head %}{% endblock %}
-</head>
-<body>
-
-  <!-- ============================================================
-       PLACEHOLDER: HEADER — Bousaina
-       Aufgabe: Hero-Banner / Fullscreen-Header mit Bild und
-       Overlay-Text. Wird oberhalb der Navigation eingebettet.
-       ============================================================ -->
-<header class="hero">
-  <div class="hero__overlay">
-    <h1 class="hero__title">TRAIN HARD. <span>STAY SHARP.</span></h1>
-    <p class="hero__sub">SuperGym Hamburg – Dein Fitnessstudio im Herzen der Stadt</p>
-    <a href="#" class="hero__btn">Jetzt anmelden</a>
-  </div>
-</header>
-
-  <!-- ============================================================
-       NAVIGATION
-       ============================================================ -->
-  <nav class="navbar">
-    <a href="{{ url_for('index') }}" class="navbar__logo">
-      SUPER<span class="navbar__logo--accent">GYM</span>
-    </a>
-
-    <!-- Hamburger Button (Mobile) -->
-    <button class="navbar__toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
-      <span class="navbar__toggle-bar"></span>
-      <span class="navbar__toggle-bar"></span>
-      <span class="navbar__toggle-bar"></span>
-    </button>
-
-    <ul class="navbar__links" id="navLinks">
-      <li><a href="{{ url_for('index') }}" class="navbar__link {% if request.endpoint == 'index' %}navbar__link--active{% endif %}">Home</a></li>
-      <li><a href="{{ url_for('kurse') }}" class="navbar__link {% if request.endpoint == 'kurse' %}navbar__link--active{% endif %}">Kurse</a></li>
-      <li><a href="{{ url_for('ueber_uns') }}" class="navbar__link {% if request.endpoint == 'ueber_uns' %}navbar__link--active{% endif %}">Über uns</a></li>
-    </ul>
-  </nav>
-
-
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SuperGym — Highlights</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -70,19 +21,19 @@
       --lightgray: #E0E0E0;
       --font: 'Inter', sans-serif;
     }
-    body {
-      background: var(--offwhite);
-      font-family: var(--font);
-      color: var(--darkgray);
-      padding: 56px 24px;
+    
+    /* Angepasst für volle Breite */
+    .section { 
+      width: 100%; 
+      margin: 0 auto; 
     }
-    .section { max-width: 900px; margin: 0 auto; }
 
     /* WRAPPER */
     .carousel-wrap {
       border: 1.5px solid var(--black);
       overflow: hidden;
       background: var(--black);
+      width: 100%; /* Stellt sicher, dass der Wrapper 100% nutzt */
     }
 
     /* ── FOTO BEREICH ── */
@@ -204,161 +155,172 @@
       .text-title { font-size: 22px; }
     }
   </style>
+
+  {% block head %}{% endblock %}
 </head>
 <body>
-<section class="section">
 
-  <div class="carousel-wrap" id="carousel">
-
-    <!-- FOTOS -->
-    <div class="photo-area">
-      <div class="photo-track" id="photoTrack">
-        <div class="photo-slide active">
-          <img src="/static/images/highlight-kurse.png" alt="Kurse" />
-        </div>
-        <div class="photo-slide">
-          <img src="/static/images/highlight-trainer.png" alt="Trainer" />
-        </div>
-        <div class="photo-slide">
-          <img src="/static/images/highlight-zeiten.png" alt="Zeiten" />
-        </div>
-        <div class="photo-slide">
-          <img src="/static/images/highlight-community.png" alt="Community" />
-        </div>
-      </div>
-      <div class="photo-badge" id="badge">01 — 04</div>
+  <header class="hero">
+    <div class="hero__overlay">
+      <h1 class="hero__title">TRAIN HARD. <span>STAY SHARP.</span></h1>
+      <p class="hero__sub">SuperGym Hamburg – Dein Fitnessstudio im Herzen der Stadt</p>
+      <a href="#" class="hero__btn">Jetzt anmelden</a>
     </div>
+  </header>
 
-    <!-- PROGRESS BAR -->
-    <div class="progress-bar">
-      <div class="progress-fill" id="progFill"></div>
-    </div>
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="navbar__logo">
+      SUPER<span class="navbar__logo--accent">GYM</span>
+    </a>
 
-    <!-- TEXTE -->
-    <div class="text-area">
+    <button class="navbar__toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+    </button>
 
-      <div class="text-slide active">
-        <div class="text-tag">01 — Kursvielfalt</div>
-        <div class="text-title">Über 20 Kurse pro Woche</div>
-        <div class="text-body">Von Yoga über Krafttraining bis HIIT — unser Kursplan bietet für jedes Level das passende Programm. Jeden Tag, jede Woche.</div>
+    <ul class="navbar__links" id="navLinks">
+      <li><a href="{{ url_for('index') }}" class="navbar__link {% if request.endpoint == 'index' %}navbar__link--active{% endif %}">Home</a></li>
+      <li><a href="{{ url_for('kurse') }}" class="navbar__link {% if request.endpoint == 'kurse' %}navbar__link--active{% endif %}">Kurse</a></li>
+      <li><a href="{{ url_for('ueber_uns') }}" class="navbar__link {% if request.endpoint == 'ueber_uns' %}navbar__link--active{% endif %}">Über uns</a></li>
+    </ul>
+  </nav>
+
+  <section class="section">
+    <div class="carousel-wrap" id="carousel">
+      <div class="photo-area">
+        <div class="photo-track" id="photoTrack">
+          <div class="photo-slide active">
+            <img src="/static/images/highlight-kurse.png" alt="Kurse" />
+          </div>
+          <div class="photo-slide">
+            <img src="/static/images/highlight-trainer.png" alt="Trainer" />
+          </div>
+          <div class="photo-slide">
+            <img src="/static/images/highlight-zeiten.png" alt="Zeiten" />
+          </div>
+          <div class="photo-slide">
+            <img src="/static/images/highlight-community.png" alt="Community" />
+          </div>
+        </div>
+        <div class="photo-badge" id="badge">01 — 04</div>
       </div>
 
-      <div class="text-slide">
-        <div class="text-tag">02 — Trainer</div>
-        <div class="text-title">Zertifizierte Trainer</div>
-        <div class="text-body">Unsere Trainer sind lizenziert, erfahren und motiviert. Individuelle Betreuung ist bei uns kein Upgrade, sondern Standard.</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progFill"></div>
       </div>
 
-      <div class="text-slide">
-        <div class="text-tag">03 — Öffnungszeiten</div>
-        <div class="text-title">Trainiere wann du willst</div>
-        <div class="text-body">Kurse von morgens bis abends, 6 Tage die Woche. Dein Zeitplan bestimmt dein Training — nicht umgekehrt.</div>
-      </div>
+      <div class="text-area">
+        <div class="text-slide active">
+          <div class="text-tag">01 — Kursvielfalt</div>
+          <div class="text-title">Über 20 Kurse pro Woche</div>
+          <div class="text-body">Von Yoga über Krafttraining bis HIIT — unser Kursplan bietet für jedes Level das passende Programm. Jeden Tag, jede Woche.</div>
+        </div>
+        <div class="text-slide">
+          <div class="text-tag">02 — Trainer</div>
+          <div class="text-title">Zertifizierte Trainer</div>
+          <div class="text-body">Unsere Trainer sind lizenziert, erfahren und motiviert. Individuelle Betreuung ist bei uns kein Upgrade, sondern Standard.</div>
+        </div>
+        <div class="text-slide">
+          <div class="text-tag">03 — Öffnungszeiten</div>
+          <div class="text-title">Trainiere wann du willst</div>
+          <div class="text-body">Kurse von morgens bis abends, 6 Tage die Woche. Dein Zeitplan bestimmt dein Training — nicht umgekehrt.</div>
+        </div>
+        <div class="text-slide">
+          <div class="text-tag">04 — Community</div>
+          <div class="text-title">Mehr als ein Gym</div>
+          <div class="text-body">Bei SuperGym trainierst du nicht allein. Unsere Community pusht sich gegenseitig — respektvoll, motiviert und auf Augenhöhe.</div>
+        </div>
 
-      <div class="text-slide">
-        <div class="text-tag">04 — Community</div>
-        <div class="text-title">Mehr als ein Gym</div>
-        <div class="text-body">Bei SuperGym trainierst du nicht allein. Unsere Community pusht sich gegenseitig — respektvoll, motiviert und auf Augenhöhe.</div>
-      </div>
-
-      <div class="controls">
-        <div class="dots" id="dots"></div>
-        <div class="counter"><strong id="curNum">01</strong> / 04</div>
-        <div class="arrows">
-          <button class="arr" id="prev" aria-label="Zurück">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="arr" id="next" aria-label="Weiter">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
+        <div class="controls">
+          <div class="dots" id="dots"></div>
+          <div class="counter"><strong id="curNum">01</strong> / 04</div>
+          <div class="arrows">
+            <button class="arr" id="prev" aria-label="Zurück">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="arr" id="next" aria-label="Weiter">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
         </div>
       </div>
-
     </div>
-  </div>
+  </section>
 
-</section>
+  <script>
+    const photoTrack = document.getElementById('photoTrack');
+    const photoSlides = photoTrack.querySelectorAll('.photo-slide');
+    const textSlides  = document.querySelectorAll('.text-slide');
+    const dotsEl  = document.getElementById('dots');
+    const badge   = document.getElementById('badge');
+    const curNum  = document.getElementById('curNum');
+    const prog    = document.getElementById('progFill');
+    const N = photoSlides.length;
+    const DELAY = 5000;
+    let cur = 0, timer;
 
-<script>
-  const photoTrack = document.getElementById('photoTrack');
-  const photoSlides = photoTrack.querySelectorAll('.photo-slide');
-  const textSlides  = document.querySelectorAll('.text-slide');
-  const dotsEl  = document.getElementById('dots');
-  const badge   = document.getElementById('badge');
-  const curNum  = document.getElementById('curNum');
-  const prog    = document.getElementById('progFill');
-  const N = photoSlides.length;
-  const DELAY = 5000;
-  let cur = 0, timer;
+    // Build dots
+    for (let i = 0; i < N; i++) {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i===0?' active':'');
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    }
 
-  // Build dots
-  for (let i = 0; i < N; i++) {
-    const d = document.createElement('button');
-    d.className = 'dot' + (i===0?' active':'');
-    d.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(d);
-  }
+    function goTo(n) {
+      photoSlides[cur].classList.remove('active');
+      textSlides[cur].classList.remove('active');
+      dotsEl.children[cur].classList.remove('active');
 
-  function goTo(n) {
-    photoSlides[cur].classList.remove('active');
-    textSlides[cur].classList.remove('active');
-    dotsEl.children[cur].classList.remove('active');
+      cur = (n + N) % N;
 
-    cur = (n + N) % N;
+      photoSlides[cur].classList.add('active');
+      textSlides[cur].classList.add('active');
+      dotsEl.children[cur].classList.add('active');
+      photoTrack.style.transform = `translateX(-${cur * 100}%)`;
+      badge.textContent   = String(cur+1).padStart(2,'0') + ' — 04';
+      curNum.textContent  = String(cur+1).padStart(2,'0');
 
-    photoSlides[cur].classList.add('active');
-    textSlides[cur].classList.add('active');
-    dotsEl.children[cur].classList.add('active');
-    photoTrack.style.transform = `translateX(-${cur * 100}%)`;
-    badge.textContent   = String(cur+1).padStart(2,'0') + ' — 04';
-    curNum.textContent  = String(cur+1).padStart(2,'0');
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearTimeout(timer);
+      prog.style.transition = 'none';
+      prog.style.width = '0%';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        prog.style.transition = `width ${DELAY}ms linear`;
+        prog.style.width = '100%';
+      }));
+      timer = setTimeout(() => goTo(cur + 1), DELAY);
+    }
+
+    document.getElementById('prev').addEventListener('click', () => goTo(cur-1));
+    document.getElementById('next').addEventListener('click', () => goTo(cur+1));
+
+    document.addEventListener('keydown', e => {
+      if (e.key==='ArrowLeft')  goTo(cur-1);
+      if (e.key==='ArrowRight') goTo(cur+1);
+    });
+
+    let tx = 0;
+    photoTrack.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
+    photoTrack.addEventListener('touchend',   e => {
+      const d = e.changedTouches[0].clientX - tx;
+      if (Math.abs(d) > 40) goTo(cur + (d<0?1:-1));
+    });
+
+    const wrap = document.getElementById('carousel');
+    wrap.addEventListener('mouseenter', () => { clearTimeout(timer); prog.style.transition='none'; });
+    wrap.addEventListener('mouseleave', resetTimer);
 
     resetTimer();
-  }
+  </script>
 
-  function resetTimer() {
-    clearTimeout(timer);
-    prog.style.transition = 'none';
-    prog.style.width = '0%';
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      prog.style.transition = `width ${DELAY}ms linear`;
-      prog.style.width = '100%';
-    }));
-    timer = setTimeout(() => goTo(cur + 1), DELAY);
-  }
-
-  document.getElementById('prev').addEventListener('click', () => goTo(cur-1));
-  document.getElementById('next').addEventListener('click', () => goTo(cur+1));
-
-  document.addEventListener('keydown', e => {
-    if (e.key==='ArrowLeft')  goTo(cur-1);
-    if (e.key==='ArrowRight') goTo(cur+1);
-  });
-
-  let tx = 0;
-  photoTrack.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
-  photoTrack.addEventListener('touchend',   e => {
-    const d = e.changedTouches[0].clientX - tx;
-    if (Math.abs(d) > 40) goTo(cur + (d<0?1:-1));
-  });
-
-  const wrap = document.getElementById('carousel');
-  wrap.addEventListener('mouseenter', () => { clearTimeout(timer); prog.style.transition='none'; });
-  wrap.addEventListener('mouseleave', resetTimer);
-
-  resetTimer();
-</script>
-
-
-
-
-  <!-- ============================================================
-       MAIN CONTENT
-       ============================================================ -->
   <main class="main">
     {% block content %}{% endblock %}
   </main>
-
 
   <footer class="footer">
     <div class="footer__inner">
@@ -381,8 +343,6 @@
   </footer>
   {% block footer %}{% endblock %}
 
-
-  <!-- Global JS -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   {% block scripts %}{% endblock %}
 
