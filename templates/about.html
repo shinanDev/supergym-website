@@ -2,6 +2,56 @@
 
 {% block title %}Über uns — SuperGym Hamburg{% endblock %}
 
+{% block head %}
+<style>
+  /* Zick-Zack Layout: Bild-Reihenfolge umkehren */
+  .feature--reverse .feature__image-wrap { order: 2; }
+  .feature--reverse .feature__content    { order: 1; }
+
+  @media (max-width: 900px) {
+    .feature--reverse .feature__image-wrap { order: -1; }
+  }
+
+  /* Trainer-Sektion: schmaler & zentriert */
+  .trainer-section .feature {
+    max-width: 950px;
+    margin: 0 auto 5rem auto;
+    gap: 4rem;
+  }
+
+  /* Trainer-Fotos: quadratisch, Kopf oben */
+  .trainer-section .feature__image-wrap {
+    aspect-ratio: 1 / 1;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+  .trainer-section .feature__image {
+    object-position: top center;
+  }
+
+  /* Trainer-Text: größer */
+  .trainer-section .feature__headline {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .trainer-section .feature__text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    max-width: 100%;
+  }
+
+  /* Trainer-Zitat */
+  .trainer-quote {
+    display: block;
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: rgba(247, 247, 247, 0.6);
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1rem;
+  }
+</style>
+{% endblock %}
+
 
 {% block content %}
 
@@ -13,150 +63,100 @@
 
 
   <!-- ============================================================
-       PLACEHOLDER: ÖFFNUNGSZEITEN — Bousaina
-       Aufgabe: Tabelle oder Grid mit Öffnungszeiten (Mo–So).
-       CI: dunkler Hintergrund, Akzentfarbe für aktuelle Tags.
+       ÖFFNUNGSZEITEN — Bousaina
        ============================================================ -->
-<section class="oeffnungszeiten">
-  <div class="oeffnungszeiten__container">
-    <h2 class="oeffnungszeiten__titel">Wann wir für dich da sind</h2>
-    <div class="oeffnungszeiten__grid">
-      <div class="oeffnungszeiten__row">
-        <span class="oeffnungszeiten__tag">Montag – Freitag</span>
-        <span class="oeffnungszeiten__zeit">06:00 – 23:00</span>
+  <section class="oeffnungszeiten">
+    <div class="oeffnungszeiten__container">
+      <h2 class="oeffnungszeiten__titel">Wann wir für dich da sind</h2>
+      <div class="oeffnungszeiten__grid">
+        <div class="oeffnungszeiten__row">
+          <span class="oeffnungszeiten__tag">Montag – Freitag</span>
+          <span class="oeffnungszeiten__zeit">06:00 – 23:00</span>
+        </div>
+        <div class="oeffnungszeiten__row">
+          <span class="oeffnungszeiten__tag">Samstag</span>
+          <span class="oeffnungszeiten__zeit">08:00 – 22:00</span>
+        </div>
+        <div class="oeffnungszeiten__row">
+          <span class="oeffnungszeiten__tag">Sonntag</span>
+          <span class="oeffnungszeiten__zeit">09:00 – 20:00</span>
+        </div>
       </div>
-      <div class="oeffnungszeiten__row">
-        <span class="oeffnungszeiten__tag">Samstag</span>
-        <span class="oeffnungszeiten__zeit">08:00 – 22:00</span>
-      </div>
-      <div class="oeffnungszeiten__row">
-        <span class="oeffnungszeiten__tag">Sonntag</span>
-        <span class="oeffnungszeiten__zeit">09:00 – 20:00</span>
-      </div>
-    </div>
-    <p class="oeffnungszeiten__hinweis">An Feiertagen können die Zeiten abweichen.</p>
-  </div>
-</section>
-
-  {% extends "base.html" %}
-
-{% block title %}Über uns — Das Team{% endblock %}
-
-{% block head %}
-<style>
-  /* 1. DAS ZICK-ZACK (Reverse-Klasse) */
-  .feature--reverse .feature__image-wrap { order: 2; }
-  .feature--reverse .feature__content { order: 1; }
-  
-  @media (max-width: 900px) {
-    .feature--reverse .feature__image-wrap { order: -1; } /* Auf dem Handy Bild immer oben */
-  }
-
-  /* 2. WENIGER WUCHTIG MACHEN */
-  .trainer-section .feature {
-    max-width: 950px; /* Macht den ganzen Block schmaler */
-    margin: 0 auto 5rem auto; /* Zentriert mit viel Abstand nach unten */
-    gap: 4rem; /* Etwas mehr Luft zwischen Foto und Text */
-  }
-
-  /* 3. KÖPFE RETTEN (Quadratisch & Fokus nach oben) */
-  .trainer-section .feature__image-wrap {
-    aspect-ratio: 1 / 1; /* Quadratisch statt Querformat */
-    max-width: 450px; /* Maximale Bildgröße */
-    margin: 0 auto;
-  }
-  .trainer-section .feature__image {
-    object-position: top center; /* Zwingt den Browser, den Kopf zu zeigen! */
-  }
-
-  /* 4. TEXT GRÖSSER MACHEN */
-  .trainer-section .feature__headline {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .trainer-section .feature__text {
-    font-size: 1.125rem; /* Text auf 18px vergrößert */
-    line-height: 1.7;
-    max-width: 100%;
-  }
-
-  /* Das Motto etwas abheben */
-  .trainer-quote {
-    display: block;
-    margin-top: 1.5rem;
-    font-style: italic;
-    color: rgba(247,247,247,0.6);
-    border-left: 2px solid var(--color-accent);
-    padding-left: 1rem;
-  }
-</style>
-{% endblock %}
-
-
-{% block content %}
-<div class="trainer-section">
-
-  <section class="feature">
-    <div class="feature__image-wrap">
-      <img
-        src="{{ url_for('static', filename='images/trainer-alex.png') }}"
-        alt="Alex Petrov"
-        class="feature__image"
-        onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
-      />
-    </div>
-    <div class="feature__content">
-      <span class="feature__label">Head Coach — Kraft & HIIT</span>
-      <h2 class="feature__headline">Alex <span class="accent">Petrov</span></h2>
-      <p class="feature__text">
-        Alex trainiert seit über 10 Jahren und ist zertifizierter Personal Trainer (A-Lizenz). Seine Spezialität: funktionelles Krafttraining und hochintensive Intervalle.
-        <span class="trainer-quote">"Kein Satz ist verschwendet, wenn die Technik stimmt."</span>
-      </p>
+      <p class="oeffnungszeiten__hinweis">An Feiertagen können die Zeiten abweichen.</p>
     </div>
   </section>
 
-  <section class="feature feature--reverse">
-    <div class="feature__image-wrap">
-      <img
-        src="{{ url_for('static', filename='images/trainer-lena.png') }}"
-        alt="Lena Hartmann"
-        class="feature__image"
-        onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
-      />
-    </div>
-    <div class="feature__content">
-      <span class="feature__label">Yoga & Mobility Coach</span>
-      <h2 class="feature__headline">Lena <span class="accent">Hartmann</span></h2>
-      <p class="feature__text">
-        Lena ist ausgebildete Yogalehrerin (500h RYT) und Mobility-Spezialistin. Sie verbindet klassisches Yoga mit modernem Beweglichkeitstraining. Ihr Fokus liegt auf Körperbewusstsein, Atmung und nachhaltigem Fortschritt.
-      </p>
-    </div>
-  </section>
-
-  <section class="feature">
-    <div class="feature__image-wrap">
-      <img
-        src="{{ url_for('static', filename='images/trainer-marco.png') }}"
-        alt="Marco da Silva"
-        class="feature__image"
-        onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
-      />
-    </div>
-    <div class="feature__content">
-      <span class="feature__label">Kickboxen & Cardio</span>
-      <h2 class="feature__headline">Marco <span class="accent">da Silva</span></h2>
-      <p class="feature__text">
-        Marco ist ehemaliger Wettkampfboxer und bringt Energie in jede Session. Seine Kurse kombinieren Boxtechnik mit Cardio-Elementen — ideal für Stressabbau und Ausdauer.
-        <span class="trainer-quote">"Gib alles. Jede Runde."</span>
-      </p>
-    </div>
-  </section>
-
-</div>
-{% endblock %}
 
   <!-- ============================================================
-       US-07: STANDORT & KARTE
+       TRAINER — Isabel
+       ============================================================ -->
+  <div class="trainer-section">
+
+    <section class="feature">
+      <div class="feature__image-wrap">
+        <img
+          src="{{ url_for('static', filename='images/trainer-alex.png') }}"
+          alt="Alex Petrov"
+          class="feature__image"
+          onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
+        />
+      </div>
+      <div class="feature__content">
+        <span class="feature__label">Head Coach — Kraft &amp; HIIT</span>
+        <h2 class="feature__headline">Alex <span class="accent">Petrov</span></h2>
+        <p class="feature__text">
+          Alex trainiert seit über 10 Jahren und ist zertifizierter Personal Trainer (A-Lizenz).
+          Seine Spezialität: funktionelles Krafttraining und hochintensive Intervalle.
+          <span class="trainer-quote">"Kein Satz ist verschwendet, wenn die Technik stimmt."</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="feature feature--reverse">
+      <div class="feature__image-wrap">
+        <img
+          src="{{ url_for('static', filename='images/trainer-lena.png') }}"
+          alt="Lena Hartmann"
+          class="feature__image"
+          onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
+        />
+      </div>
+      <div class="feature__content">
+        <span class="feature__label">Yoga &amp; Mobility Coach</span>
+        <h2 class="feature__headline">Lena <span class="accent">Hartmann</span></h2>
+        <p class="feature__text">
+          Lena ist ausgebildete Yogalehrerin (500h RYT) und Mobility-Spezialistin.
+          Sie verbindet klassisches Yoga mit modernem Beweglichkeitstraining.
+          Ihr Fokus liegt auf Körperbewusstsein, Atmung und nachhaltigem Fortschritt.
+        </p>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="feature__image-wrap">
+        <img
+          src="{{ url_for('static', filename='images/trainer-marco.png') }}"
+          alt="Marco da Silva"
+          class="feature__image"
+          onerror="this.style.background='#1A1A1A';this.removeAttribute('src')"
+        />
+      </div>
+      <div class="feature__content">
+        <span class="feature__label">Kickboxen &amp; Cardio</span>
+        <h2 class="feature__headline">Marco <span class="accent">da Silva</span></h2>
+        <p class="feature__text">
+          Marco ist ehemaliger Wettkampfboxer und bringt Energie in jede Session.
+          Seine Kurse kombinieren Boxtechnik mit Cardio-Elementen — ideal für Stressabbau und Ausdauer.
+          <span class="trainer-quote">"Gib alles. Jede Runde."</span>
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+
+  <!-- ============================================================
+       US-07: STANDORT & KARTE — Philipp
        ============================================================ -->
   <section class="location">
 
