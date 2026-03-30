@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 
   <style>
+    /* Spezifische Karussell-Styles (Breite wird jetzt über style.css geregelt) */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --black:     #0D0D0D;
@@ -21,19 +22,13 @@
       --lightgray: #E0E0E0;
       --font: 'Inter', sans-serif;
     }
-    
-    /* Angepasst für volle Breite */
-    .section { 
-      width: 100%; 
-      margin: 0 auto; 
-    }
 
     /* WRAPPER */
     .carousel-wrap {
       border: 1.5px solid var(--black);
       overflow: hidden;
       background: var(--black);
-      width: 100%; /* Stellt sicher, dass der Wrapper 100% nutzt */
+      width: 100%; 
     }
 
     /* ── FOTO BEREICH ── */
@@ -186,7 +181,7 @@
     </ul>
   </nav>
 
-  <section class="section">
+  <section class="carousel-container">
     <div class="carousel-wrap" id="carousel">
       <div class="photo-area">
         <div class="photo-track" id="photoTrack">

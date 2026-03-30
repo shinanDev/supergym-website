@@ -23,11 +23,13 @@
       padding: 56px 24px;
     }
     
-    /* HIER WURDE DIE ÄNDERUNG VORGENOMMEN */
-    .section { 
-      width: 100%; /* Nimmt jetzt die volle Breite des Layouts ein */
-      margin: 0 auto; 
-      /* max-width: 900px; <-- Diese Blockade wurde entfernt! */
+    /* HIER WURDE DIE ÄNDERUNG VORGENOMMEN (Brechstange für 100% Breite) */
+    .carousel-container {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      overflow: hidden;
     }
 
     /* WRAPPER */
@@ -159,7 +161,8 @@
   </style>
 </head>
 <body>
-<section class="section">
+
+<section class="carousel-container">
 
   <div class="carousel-wrap" id="carousel">
 
