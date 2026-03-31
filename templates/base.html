@@ -164,9 +164,13 @@
   </header>
 
   <nav class="navbar">
-    <a href="{{ url_for('index') }}" class="navbar__logo">
-      SUPER<span class="navbar__logo--accent">GYM</span>
-    </a>
+    <a href="{{ url_for('index') }}" class="navbar__logo-link" aria-label="SuperGym Hamburg">
+      <img
+       src="{{ url_for('static', filename='images/supergym-logo.svg') }}"
+       alt="SuperGym Hamburg"
+       class="navbar__logo-img"
+   >
+ </a>
 
     <button class="navbar__toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
       <span class="navbar__toggle-bar"></span>
