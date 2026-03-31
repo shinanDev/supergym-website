@@ -19,5 +19,10 @@ def ueber_uns():
     return render_template("about.html")
 
 
+@app.route("/datenschutz")
+def datenschutz():
+    return render_template("datenschutz.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
