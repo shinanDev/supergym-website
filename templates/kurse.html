@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Kurse — SuperGym Hamburg{% endblock %}
+
+{% block content %}
+<section class="kurse-section">
+  <div class="container">
+
+    <div class="kurse-header">
+      <h1 class="kurse-title">UNSER <span class="accent">KURSANGEBOT</span></h1>
+      <p class="kurse-subtitle">Finde deinen Kurs — vom Einstieg bis zum nächsten Level.</p>
+    </div>
+
+    <div class="kurse-grid">
+      {% for kurs in kurse %}
+      <article class="kurs-card {% if kurs.freie_plaetze == 0 %}kurs-card--ausgebucht{% endif %}">
+
+        <div class="kurs-card__head">
+          <span class="kurs-badge kurs-badge--{{ kurs.niveau | lower | replace(' ', '-') }}">
+            {{ kurs.niveau }}
+          </span>
+          {% if kurs.freie_plaetze == 0 %}
+          <span class="kurs-badge kurs-badge--ausgebucht">Ausgebucht</span>
+          {% endif %}
+        </div>
+
+        <h2 class="kurs-card__name">{{ kurs.name }}</h2>
+        <p class="kurs-card__desc">{{ kurs.beschreibung }}</p>
+
+        <ul class="kurs-card__meta">
+          <li><span class="kurs-card__meta-label">Tag</span>{{ kurs.wochentag }}</li>
+          <li><span class="kurs-card__meta-label">Zeit</span>{{ kurs.uhrzeit }} Uhr</li>
+          <li><span class="kurs-card__meta-label">Dauer</span>{{ kurs.dauer }} Min</li>
+          <li><span class="kurs-card__meta-label">Trainer</span>{{ kurs.trainer }}</li>
+          <li>
+            <span class="kurs-card__meta-label">Plätze</span>
+            {% if kurs.freie_plaetze == 0 %}
+            <span class="kurs-card__plaetze kurs-card__plaetze--voll">ausgebucht</span>
+            {% else %}
+            <span class="kurs-card__plaetze">{{ kurs.freie_plaetze }} frei</span>
+            {% endif %}
+          </li>
+        </ul>
+
+        <!-- KURSDETAIL-LINK: href="/kurse/{{ kurs.id }}" — Isabel implementiert /kurse/<id> -->
+        <a href="/kurse/{{ kurs.id }}"
+           class="btn btn--primary kurs-card__cta {% if kurs.freie_plaetze == 0 %}kurs-card__cta--disabled{% endif %}"
+           {% if kurs.freie_plaetze == 0 %}aria-disabled="true" tabindex="-1"{% endif %}>
+          {% if kurs.freie_plaetze == 0 %}Warteliste{% else %}Jetzt anmelden{% endif %}
+        </a>
+
+      </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}
