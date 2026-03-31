@@ -21,6 +21,18 @@ def kurse():
     return render_template("kurse.html", kurse=kurse_list)
 
 
+@app.route("/kurse/<int:id>")
+def kurs_details(id):
+    conn = get_db()
+    kurs = conn.execute('SELECT * FROM kurse WHERE id = ?', (id,)).fetchone()
+    conn.close()
+    
+    if kurs is None:
+        return "Kurs nicht gefunden", 404
+        
+    return render_template("kurse_details.html", kurs=kurs)
+
+
 @app.route('/impressum')
 def impressum():
     return render_template('impressum.html')
