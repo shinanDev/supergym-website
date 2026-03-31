@@ -55,10 +55,7 @@
 
 {% block content %}
 
-  <!-- ============================================================
-       GYM-GESCHICHTE — Vasilji
-       ============================================================ -->
- <section class="history">
+  <section class="history">
     <div class="history__inner">
       <div class="history__header">
         <span class="history__label">Unsere Geschichte</span>
@@ -88,9 +85,6 @@
   </section>
 
 
-  <!-- ============================================================
-       ÖFFNUNGSZEITEN — Bousaina
-       ============================================================ -->
   <section class="oeffnungszeiten">
     <div class="oeffnungszeiten__container">
       <h2 class="oeffnungszeiten__titel">Wann wir für dich da sind</h2>
@@ -113,12 +107,9 @@
   </section>
 
 
-  <!-- ============================================================
-       TRAINER — Isabel
-       ============================================================ -->
   <div class="trainer-section">
 
-    <section class="feature">
+    <section class="feature" id="alex-petrov" style="scroll-margin-top: 100px;">
       <div class="feature__image-wrap">
         <img
           src="{{ url_for('static', filename='images/trainer-alex.png') }}"
@@ -128,7 +119,7 @@
         />
       </div>
       <div class="feature__content">
-        <span class="feature__label">Head Coach — Kraft &amp; HIIT</span>
+        <span class="feature__label">Head Coach — Kraft & HIIT</span>
         <h2 class="feature__headline">Alex <span class="accent">Petrov</span></h2>
         <p class="feature__text">
           Alex trainiert seit über 10 Jahren und ist zertifizierter Personal Trainer (A-Lizenz).
@@ -138,7 +129,7 @@
       </div>
     </section>
 
-    <section class="feature feature--reverse">
+    <section class="feature feature--reverse" id="lena-hartmann" style="scroll-margin-top: 100px;">
       <div class="feature__image-wrap">
         <img
           src="{{ url_for('static', filename='images/trainer-lena.png') }}"
@@ -148,7 +139,7 @@
         />
       </div>
       <div class="feature__content">
-        <span class="feature__label">Yoga &amp; Mobility Coach</span>
+        <span class="feature__label">Yoga & Mobility Coach</span>
         <h2 class="feature__headline">Lena <span class="accent">Hartmann</span></h2>
         <p class="feature__text">
           Lena ist ausgebildete Yogalehrerin (500h RYT) und Mobility-Spezialistin.
@@ -158,7 +149,7 @@
       </div>
     </section>
 
-    <section class="feature">
+    <section class="feature" id="marco-da-silva" style="scroll-margin-top: 100px;">
       <div class="feature__image-wrap">
         <img
           src="{{ url_for('static', filename='images/trainer-marco.png') }}"
@@ -168,7 +159,7 @@
         />
       </div>
       <div class="feature__content">
-        <span class="feature__label">Kickboxen &amp; Cardio</span>
+        <span class="feature__label">Kickboxen & Cardio</span>
         <h2 class="feature__headline">Marco <span class="accent">da Silva</span></h2>
         <p class="feature__text">
           Marco ist ehemaliger Wettkampfboxer und bringt Energie in jede Session.
@@ -181,9 +172,6 @@
   </div>
 
 
-  <!-- ============================================================
-       US-07: STANDORT & KARTE — Philipp
-       ============================================================ -->
   <section class="location">
 
     <div class="location__header">
@@ -193,7 +181,6 @@
 
     <div class="location__body">
 
-      <!-- Adress-Block -->
       <div class="location__info">
         <div class="location__address">
           <span class="location__address-name">SuperGym Hamburg</span>
@@ -224,8 +211,6 @@
         >Route planen</a>
       </div>
 
-      <!-- Google Maps Embed -->
-      <!-- HINWEIS: URL mit echter Google Maps Place-ID ersetzen für Produktion -->
       <div class="location__map-wrap">
         <iframe
           class="location__map"
