@@ -169,8 +169,8 @@
        src="{{ url_for('static', filename='images/supergym-logo.svg') }}"
        alt="SuperGym Hamburg"
        class="navbar__logo-img"
-   >
- </a>
+      >
+    </a>
 
     <button class="navbar__toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
       <span class="navbar__toggle-bar"></span>
@@ -322,25 +322,52 @@
   </main>
 
   <footer class="footer">
-    <div class="footer__inner">
-      <div class="footer__brand">
-        SUPER<span class="footer__brand--accent">GYM</span>
+    <div class="footer__inner" style="align-items: flex-start; justify-content: space-between;">
+      
+      <div class="footer__left" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="footer__brand">
+          SUPER<span class="footer__brand--accent">GYM</span>
+        </div>
+        <nav class="footer__nav" style="flex-wrap: wrap;">
+          <a href="{{ url_for('index') }}" class="footer__link">Home</a>
+          <a href="{{ url_for('kurse') }}" class="footer__link">Kurse</a>
+          <a href="{{ url_for('ueber_uns') }}" class="footer__link">Über uns</a>
+        </nav>
+        <div class="footer__legal">
+          <a href="{{ url_for('impressum') }}" class="footer__link">Impressum</a>
+          <a href="{{ url_for('datenschutz') }}" class="footer__link">Datenschutz</a>
+        </div>
       </div>
-      <nav class="footer__nav">
-        <a href="{{ url_for('index') }}" class="footer__link">Home</a>
-        <a href="{{ url_for('kurse') }}" class="footer__link">Kurse</a>
-        <a href="{{ url_for('ueber_uns') }}" class="footer__link">Über uns</a>
-      </nav>
-      <div class="footer__legal">
-        <a href="{{ url_for('impressum') }}" class="footer__link">Impressum</a>
-        <a href="{{ url_for('datenschutz') }}" class="footer__link">Datenschutz</a>
+
+      <div class="footer-form-wrap">
+        <h3 class="footer-form__title">Frag uns was!</h3>
+        
+        <form id="footerContactForm" class="footer-form">
+          <input type="text" id="name" class="footer-form__input" placeholder="Dein Name" required />
+          <input type="email" id="email" class="footer-form__input" placeholder="Deine E-Mail" required />
+          <textarea id="message" class="footer-form__textarea" placeholder="Deine Nachricht" required></textarea>
+          
+          <button type="submit" class="btn btn--primary" style="width: 100%; margin-top: 0.5rem;">Nachricht Senden</button>
+        </form>
+        
+        <div id="footerSuccessMsg" class="footer-form__success">
+          Danke! Wir melden uns asap. 🦾
+        </div>
       </div>
+
     </div>
     <div class="footer__copy">
       © 2026 SuperGym Hamburg
     </div>
   </footer>
-  {% block footer %}{% endblock %}
+
+  <script>
+    document.getElementById('footerContactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      this.style.display = 'none'; 
+      document.getElementById('footerSuccessMsg').style.display = 'block'; 
+    });
+  </script>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   {% block scripts %}{% endblock %}

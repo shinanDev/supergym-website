@@ -805,7 +805,9 @@ ul {
   .history__timeline {
     padding-left: 1.25rem;
   }
-}/* ============================================================
+}
+
+/* ============================================================
    IMPRESSUM
    ============================================================ */
 .impressum {
@@ -845,4 +847,68 @@ ul {
   color: #ffffff;
   font-size: 1rem;
   line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   FOOTER KONTAKTFORMULAR (US-19)
+   ------------------------------------------------------------ */
+.footer-form-wrap {
+  flex: 1;
+  max-width: 400px;
+  width: 100%;
+}
+
+.footer-form__title {
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.footer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Die Eingabefelder im CI-Look */
+.footer-form__input,
+.footer-form__textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  border-radius: 0; /* Schön eckig bleiben! */
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.footer-form__textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Wenn man reinklickt, leuchtet es neongelb */
+.footer-form__input:focus,
+.footer-form__textarea:focus {
+  border-color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* Die Bestätigungsmeldung (standardmäßig versteckt) */
+.footer-form__success {
+  display: none;
+  color: var(--color-primary);
+  background-color: var(--color-accent);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border: 2px solid var(--color-accent);
 }
