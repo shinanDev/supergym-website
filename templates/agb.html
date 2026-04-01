@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+
+{% block title %}AGB — SuperGym Hamburg{% endblock %}
+
+{% block head %}
+<style>
+  .agb {
+    background: var(--black);
+    color: var(--offwhite);
+    padding: 5rem 1.5rem 6rem;
+  }
+
+  .agb__inner {
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .agb__label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+  }
+
+  .agb__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: 0.75rem;
+  }
+
+  .agb__updated {
+    font-size: 0.8rem;
+    color: rgba(247, 247, 247, 0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .agb__section {
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .agb__section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .agb__section-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 0.6rem;
+  }
+
+  .agb__section-title {
+    font-size: 1.25rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.25rem;
+    color: var(--offwhite);
+  }
+
+  .agb__text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(247, 247, 247, 0.7);
+  }
+
+  .agb__text + .agb__text {
+    margin-top: 1rem;
+  }
+
+  .agb__list {
+    list-style: none;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .agb__list li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(247, 247, 247, 0.7);
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .agb__list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    background: var(--yellow);
+  }
+
+  .agb__highlight {
+    display: block;
+    background: rgba(245, 255, 64, 0.08);
+    border-left: 3px solid var(--yellow);
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(247, 247, 247, 0.75);
+  }
+
+  .agb__contact-block {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .agb__contact-block span {
+    font-size: 0.95rem;
+    color: rgba(247, 247, 247, 0.7);
+    line-height: 1.7;
+  }
+
+  .agb__contact-block a {
+    color: var(--yellow);
+    font-weight: 600;
+  }
+
+  .agb__contact-block a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .agb {
+      padding: 3.5rem 1.25rem 4rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="agb">
+  <div class="agb__inner">
+
+    <span class="agb__label">Rechtliches</span>
+    <h1 class="agb__title">Allgemeine Geschäfts&shy;bedingungen</h1>
+    <p class="agb__updated">Stand: April 2026</p>
+
+    <!-- § 1 Geltungsbereich -->
+    <div class="agb__section">
+      <div class="agb__section-number">§ 1</div>
+      <h2 class="agb__section-title">Geltungsbereich</h2>
+      <p class="agb__text">
+        Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge zwischen der
+        SuperGym Hamburg GmbH, Große Bergstraße 228, 22767 Hamburg (nachfolgend „SuperGym"),
+        und ihren Kunden bezüglich der Buchung und Nutzung von Kursen sowie sonstiger
+        Dienstleistungen des Fitnessstudios.
+      </p>
+      <p class="agb__text">
+        Abweichende, entgegenstehende oder ergänzende Allgemeine Geschäftsbedingungen des
+        Kunden werden nicht Vertragsbestandteil, es sei denn, SuperGym stimmt ihrer Geltung
+        ausdrücklich schriftlich zu.
+      </p>
+    </div>
+
+    <!-- § 2 Kursanmeldung -->
+    <div class="agb__section">
+      <div class="agb__section-number">§ 2</div>
+      <h2 class="agb__section-title">Kursanmeldung</h2>
+      <p class="agb__text">
+        Die Anmeldung zu einem Kurs erfolgt online über das Buchungsformular auf dieser Website.
+        Mit dem Absenden der Anmeldung gibt der Kunde ein verbindliches Angebot zum Abschluss
+        eines Kursvertrags ab.
+      </p>
+      <p class="agb__text">
+        SuperGym bestätigt die Anmeldung per E-Mail. Erst mit dem Eingang dieser Bestätigungs-E-Mail
+        kommt der Vertrag zustande. Ein Anspruch auf Teilnahme besteht erst nach Vertragsschluss
+        und vollständiger Zahlung der Kursgebühr.
+      </p>
+      <ul class="agb__list">
+        <li>Pro Person ist nur eine Anmeldung je Kurs möglich.</li>
+        <li>Minderjährige benötigen die schriftliche Einwilligung eines Erziehungsberechtigten.</li>
+        <li>Die Angabe einer gültigen E-Mail-Adresse ist Pflichtvoraussetzung für die Anmeldung.</li>
+        <li>SuperGym behält sich vor, Kurse bei zu geringer Teilnehmerzahl abzusagen.</li>
+      </ul>
+      <div class="agb__highlight">
+        Ist ein Kurs zum Zeitpunkt der Anmeldung ausgebucht, wird die Anfrage nicht gespeichert.
+        Bitte wählen Sie einen Kurs mit verfügbaren Plätzen oder nehmen Sie direkt Kontakt auf.
+      </div>
+    </div>
+
+    <!-- § 3 Stornierung & Rücktritt -->
+    <div class="agb__section">
+      <div class="agb__section-number">§ 3</div>
+      <h2 class="agb__section-title">Stornierung &amp; Rücktritt</h2>
+      <p class="agb__text">
+        Der Kunde kann von seiner Anmeldung bis zu <strong>72 Stunden vor Kursbeginn</strong>
+        kostenlos zurücktreten. Der Rücktritt ist schriftlich per E-Mail an
+        <a href="mailto:kurse@supergym-hamburg.de" style="color: var(--yellow); font-weight: 600;">
+          kurse@supergym-hamburg.de
+        </a> zu erklären.
+      </p>
+      <ul class="agb__list">
+        <li>Stornierung bis 72 Stunden vor Kursbeginn: kostenlos, volle Erstattung der Kursgebühr.</li>
+        <li>Stornierung zwischen 72 und 24 Stunden vor Kursbeginn: 50 % der Kursgebühr werden einbehalten.</li>
+        <li>Stornierung weniger als 24 Stunden vor Kursbeginn oder Nichterscheinen: volle Kursgebühr wird fällig.</li>
+      </ul>
+      <p class="agb__text">
+        SuperGym behält sich das Recht vor, einen Kurs bis zu 24 Stunden vor Beginn abzusagen,
+        insbesondere bei Erkrankung des Trainers, höherer Gewalt oder zu geringer Teilnehmerzahl.
+        In diesem Fall wird die Kursgebühr vollständig erstattet. Darüber hinausgehende Ansprüche
+        sind ausgeschlossen.
+      </p>
+    </div>
+
+    <!-- § 4 Haftung -->
+    <div class="agb__section">
+      <div class="agb__section-number">§ 4</div>
+      <h2 class="agb__section-title">Haftung</h2>
+      <p class="agb__text">
+        Die Teilnahme an den Sportkursen erfolgt auf eigene Gefahr. Der Kunde versichert,
+        dass er gesundheitlich in der Lage ist, an dem gewählten Kurs teilzunehmen. Bei
+        bestehenden Vorerkrankungen wird eine ärztliche Freigabe empfohlen.
+      </p>
+      <p class="agb__text">
+        SuperGym haftet für Schäden, die durch vorsätzliches oder grob fahrlässiges Verhalten
+        von SuperGym, seinen gesetzlichen Vertretern oder Erfüllungsgehilfen verursacht wurden.
+        Bei leichter Fahrlässigkeit haftet SuperGym nur bei Verletzung wesentlicher
+        Vertragspflichten (Kardinalspflichten) sowie bei Schäden aus der Verletzung des Lebens,
+        des Körpers oder der Gesundheit.
+      </p>
+      <div class="agb__highlight">
+        SuperGym übernimmt keine Haftung für Schäden an mitgebrachten Gegenständen oder
+        Wertgegenständen im Studiobereich, es sei denn, diese wurden ausdrücklich zur
+        Aufbewahrung übergeben.
+      </div>
+    </div>
+
+    <!-- § 5 Datenschutz -->
+    <div class="agb__section">
+      <div class="agb__section-number">§ 5</div>
+      <h2 class="agb__section-title">Datenschutz</h2>
+      <p class="agb__text">
+        Die Erhebung, Verarbeitung und Nutzung personenbezogener Daten erfolgt ausschließlich
+        im Rahmen der geltenden datenschutzrechtlichen Bestimmungen, insbesondere der
+        Datenschutz-Grundverordnung (DSGVO).
+      </p>
+      <p class="agb__text">
+        Alle Details zur Datenverarbeitung, zu den Rechten der betroffenen Personen und zu
+        Kontaktmöglichkeiten für Datenschutzanfragen entnehmen Sie bitte unserer
+        <a href="{{ url_for('datenschutz') }}" style="color: var(--yellow); font-weight: 600;">
+          Datenschutzerklärung
+        </a>.
+      </p>
+    </div>
+
+    <!-- § 6 Schlussbestimmungen -->
+    <div class="agb__section">
+      <div class="agb__section-number">§ 6</div>
+      <h2 class="agb__section-title">Schlussbestimmungen</h2>
+      <p class="agb__text">
+        Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand für alle Streitigkeiten
+        aus diesem Vertragsverhältnis ist Hamburg, sofern der Kunde Kaufmann, eine juristische
+        Person des öffentlichen Rechts oder ein öffentlich-rechtliches Sondervermögen ist.
+      </p>
+      <p class="agb__text">
+        Sollten einzelne Bestimmungen dieser AGB unwirksam oder undurchführbar sein oder werden,
+        bleibt die Wirksamkeit der übrigen Bestimmungen davon unberührt. Anstelle der unwirksamen
+        Bestimmung gilt eine wirksame Regelung als vereinbart, die dem wirtschaftlichen Zweck
+        der unwirksamen Bestimmung am nächsten kommt.
+      </p>
+      <div class="agb__contact-block">
+        <span><strong>SuperGym Hamburg GmbH</strong></span>
+        <span>Große Bergstraße 228</span>
+        <span>22767 Hamburg</span>
+        <span>E-Mail: <a href="mailto:info@supergym-hamburg.de">info@supergym-hamburg.de</a></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
