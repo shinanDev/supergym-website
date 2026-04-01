@@ -1,4 +1,4 @@
-# 🏋️ SuperGym Hamburg
+# SuperGym Hamburg
 
 > "Train Hard. Stay Sharp."
 
@@ -8,7 +8,7 @@ Fachinformatiker für Anwendungsentwicklung @ BBQ Hamburg 2026.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - Python 3.13 / Flask
 - Jinja2 Templates
@@ -18,7 +18,7 @@ Fachinformatiker für Anwendungsentwicklung @ BBQ Hamburg 2026.
 
 ---
 
-## 🎨 Corporate Identity
+## Corporate Identity
 
 | Rolle | Farbe | Hex |
 |---|---|---|
@@ -59,7 +59,7 @@ supergym-website/
 
 ---
 
-## 🗄️ Datenbankstruktur
+## Datenbankstruktur
 
 ### Tabelle `kurse`
 | Feld | Typ | Beschreibung |
@@ -96,7 +96,7 @@ supergym-website/
 
 ---
 
-## 🚀 Installation & Start
+## Installation & Start
 ```bash
 # Repo klonen
 git clone git@github.com:shinanDev/supergym-website.git
@@ -145,7 +145,7 @@ flask run
 
 ---
 
-## 🔀 Git Workflow
+## Git Workflow
 ```bash
 # Vor jedem Arbeitsbeginn
 git checkout main
@@ -167,9 +167,9 @@ git push -u origin feature/mein-feature
 
 ---
 
-## 📋 Scrum-Prozess
+## Scrum-Prozess
 
-Entwickelt in **2 Sprints** nach Scrum-Methodik:
+Entwickelt in **3 Sprints** nach Scrum-Methodik:
 
 **Sprint 1** – Homepage & About-Seite
 - Navigation, Header, Karussell, Body, Footer
