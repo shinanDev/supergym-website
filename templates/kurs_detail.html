@@ -1,20 +1,265 @@
 {% extends "base.html" %}
+
 {% block title %}{{ kurs.name }} — SuperGym Hamburg{% endblock %}
+
 {% block content %}
-<section class="main container">
-  <a href="/kurse" class="btn btn--ghost" style="margin-bottom:2rem;">← Zurück</a>
-  <h1 style="color:var(--color-subtle);text-transform:uppercase;">{{ kurs.name }}</h1>
-  <p style="color:var(--color-accent);margin:0.5rem 0;">{{ kurs.niveau }} | {{ kurs.dauer }} Min.</p>
-  <p style="margin:1rem 0;">{{ kurs.beschreibung }}</p>
-  <ul style="list-style:none;margin:1rem 0;display:flex;gap:2rem;">
-    <li><strong>Tag:</strong> {{ kurs.wochentag }}</li>
-    <li><strong>Zeit:</strong> {{ kurs.uhrzeit }} Uhr</li>
-    <li><strong>Trainer:</strong> {{ kurs.trainer }}</li>
-  </ul>
-  {% if kurs.freie_plaetze == 0 %}
-    <p style="color:red;">Kurs ausgebucht</p>
-  {% else %}
-    <a href="/kurse/{{ kurs.id }}/anmelden" class="btn btn--primary">Jetzt anmelden</a>
+
+{# ── Trainer-Bild Mapping ──────────────────────────────────── #}
+{% set trainer_img = {
+  'Alex Petrov':    'trainer-alex.png',
+  'Lena Hartmann':  'trainer-lena.png',
+  'Marco da Silva': 'trainer-marco.png'
+} %}
+
+{# ── Niveau → CSS-Modifier ────────────────────────────────── #}
+{% set niveau_mod = {
+  'Anfänger':        'anfaenger',
+  'Mittel':          'mittel',
+  'Fortgeschritten': 'fortgeschritten',
+  'Alle Level':      'alle-level'
+} %}
+
+<!-- HERO -->
+<div class="kd-hero">
+  <div class="kd-hero__inner container">
+    <a href="/kurse" class="kd-back">
+      <span class="kd-back__arrow">←</span> Alle Kurse
+    </a>
+
+    <div class="kd-hero__meta">
+      <span class="kd-niveau kd-niveau--{{ niveau_mod[kurs.niveau] | default('alle-level') }}">
+        {{ kurs.niveau }}
+      </span>
+      <span class="kd-hero__dauer">{{ kurs.dauer }} Min.</span>
+    </div>
+
+    <h1 class="kd-hero__title">{{ kurs.name }}</h1>
+    <p class="kd-hero__desc">{{ kurs.beschreibung }}</p>
+
+    {% if kurs.freie_plaetze == 0 %}
+    <div class="kd-hero__ausgebucht">
+      <span class="kd-ausgebucht-badge">Ausgebucht</span>
+      <p class="kd-ausgebucht-text">Alle Plätze für diesen Kurs sind vergeben.</p>
+    </div>
+    {% else %}
+    <div class="kd-hero__cta">
+      <button type="button"
+              class="btn btn--primary kd-cta-btn kd-open-anmelde-modal"
+              data-kurs-id="{{ kurs.id }}"
+              data-kurs-name="{{ kurs.name }}">
+        Jetzt anmelden
+      </button>
+      <p class="kd-plaetze-hint">
+        <span class="kd-plaetze-hint__num">{{ kurs.freie_plaetze }}</span>
+        freie Plätze verfügbar
+      </p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- INHALT -->
+<section class="kd-body container">
+
+  <!-- Info-Grid -->
+  <div class="kd-info-grid">
+
+    <div class="kd-info-card">
+      <span class="kd-info-card__label">Wochentag</span>
+      <span class="kd-info-card__value">{{ kurs.wochentag }}</span>
+    </div>
+
+    <div class="kd-info-card">
+      <span class="kd-info-card__label">Uhrzeit</span>
+      <span class="kd-info-card__value">{{ kurs.uhrzeit }} Uhr</span>
+    </div>
+
+    <div class="kd-info-card">
+      <span class="kd-info-card__label">Dauer</span>
+      <span class="kd-info-card__value">{{ kurs.dauer }} Minuten</span>
+    </div>
+
+    <div class="kd-info-card">
+      <span class="kd-info-card__label">Kapazität</span>
+      <span class="kd-info-card__value">{{ kurs.kapazitaet }} Plätze</span>
+    </div>
+
+    <div class="kd-info-card {% if kurs.freie_plaetze == 0 %}kd-info-card--voll{% endif %}">
+      <span class="kd-info-card__label">Freie Plätze</span>
+      <span class="kd-info-card__value">
+        {% if kurs.freie_plaetze == 0 %}Ausgebucht
+        {% else %}{{ kurs.freie_plaetze }} / {{ kurs.kapazitaet }}
+        {% endif %}
+      </span>
+    </div>
+
+    <div class="kd-info-card">
+      <span class="kd-info-card__label">Niveau</span>
+      <span class="kd-info-card__value">{{ kurs.niveau }}</span>
+    </div>
+
+  </div>
+
+  <!-- Trainer-Bereich -->
+  <div class="kd-trainer">
+    <div class="kd-trainer__img-wrap">
+      {% if kurs.trainer in trainer_img %}
+      <img
+        src="{{ url_for('static', filename='images/' + trainer_img[kurs.trainer]) }}"
+        alt="{{ kurs.trainer }}"
+        class="kd-trainer__img"
+      />
+      {% else %}
+      <div class="kd-trainer__img-placeholder">
+        {{ kurs.trainer[0] }}
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="kd-trainer__info">
+      <span class="kd-trainer__label">Dein Trainer</span>
+      <h2 class="kd-trainer__name">{{ kurs.trainer }}</h2>
+      <a href="/about#{{ kurs.trainer | lower | replace(' ', '-') }}" class="kd-trainer__link">
+        Trainerprofil ansehen →
+      </a>
+    </div>
+  </div>
+
+  <!-- Auslastungs-Balken -->
+  {% if kurs.kapazitaet > 0 %}
+  {% set belegt = kurs.kapazitaet - kurs.freie_plaetze %}
+  {% set prozent = (belegt / kurs.kapazitaet * 100) | int %}
+  <div class="kd-auslastung">
+    <div class="kd-auslastung__header">
+      <span class="kd-auslastung__label">Auslastung</span>
+      <span class="kd-auslastung__stat">{{ belegt }} / {{ kurs.kapazitaet }} Plätze belegt</span>
+    </div>
+    <div class="kd-auslastung__bar">
+      <div class="kd-auslastung__fill
+           {% if prozent >= 100 %}kd-auslastung__fill--voll
+           {% elif prozent >= 75 %}kd-auslastung__fill--hoch{% endif %}"
+           style="width: {{ prozent }}%;"></div>
+    </div>
+    <span class="kd-auslastung__prozent">{{ prozent }} %</span>
+  </div>
   {% endif %}
+
+  <!-- Footer-CTA -->
+  <div class="kd-footer-cta">
+    {% if kurs.freie_plaetze == 0 %}
+    <p class="kd-footer-cta__ausgebucht">Dieser Kurs ist ausgebucht.</p>
+    <a href="/kurse" class="btn btn--ghost">Anderen Kurs suchen</a>
+    {% else %}
+    <p class="kd-footer-cta__text">Bereit? Sichere dir jetzt deinen Platz.</p>
+    <button type="button"
+            class="btn btn--primary kd-cta-btn kd-open-anmelde-modal"
+            data-kurs-id="{{ kurs.id }}"
+            data-kurs-name="{{ kurs.name }}">
+      Jetzt anmelden
+    </button>
+    <a href="/kurse" class="btn btn--ghost">Zurück zur Übersicht</a>
+    {% endif %}
+  </div>
+
 </section>
+
+<!-- ── KURSANMELDE-MODAL ──────────────────────────────────── -->
+<div class="modal-overlay" id="kursAnmeldeModal" role="dialog" aria-modal="true">
+  <div class="modal-box anmelde-modal__box">
+    <button class="modal-close" id="closeKursAnmeldeModal" aria-label="Schließen">&times;</button>
+
+    <!-- Formular-Ansicht -->
+    <div id="kursAnmeldeFormContainer">
+      <p class="anmelde-modal__label" id="kursAnmeldeKursLabel"></p>
+      <h3 class="modal-title">Platz <span class="accent">sichern</span></h3>
+
+      <form id="kursAnmeldeForm" class="modal-form" novalidate>
+        <input type="text" name="name" class="modal-form__input"
+               placeholder="Dein Name" required autocomplete="name" />
+        <input type="email" name="email" class="modal-form__input"
+               placeholder="Deine E-Mail" required autocomplete="email" />
+
+        <p id="kursAnmeldeError" class="modal-form__error" style="display:none;"></p>
+
+        <button type="submit" class="btn btn--primary anmelde-modal__submit">Platz sichern</button>
+      </form>
+    </div>
+
+    <!-- Erfolgs-Ansicht -->
+    <div id="kursAnmeldeSuccess" style="display:none;">
+      <div class="modal-success-icon">✓</div>
+      <h3 class="modal-success-title">Anmeldung bestätigt!</h3>
+      <p id="kursAnmeldeSuccessText" class="modal-success-text"></p>
+      <button type="button" class="btn btn--primary" id="kursAnmeldeSuccessClose"
+              style="margin-top:1.5rem; width:100%;">Schließen</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  (function () {
+    var overlay     = document.getElementById('kursAnmeldeModal');
+    var formWrap    = document.getElementById('kursAnmeldeFormContainer');
+    var successWrap = document.getElementById('kursAnmeldeSuccess');
+    var form        = document.getElementById('kursAnmeldeForm');
+    var errorEl     = document.getElementById('kursAnmeldeError');
+    var successText = document.getElementById('kursAnmeldeSuccessText');
+    var kursLabel   = document.getElementById('kursAnmeldeKursLabel');
+
+    var currentKursId = null;
+
+    // Alle "Jetzt anmelden"-Buttons auf der Seite
+    document.querySelectorAll('.kd-open-anmelde-modal').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        currentKursId = btn.dataset.kursId;
+        kursLabel.textContent = btn.dataset.kursName;
+
+        formWrap.style.display    = 'block';
+        successWrap.style.display = 'none';
+        errorEl.style.display     = 'none';
+        form.reset();
+        overlay.classList.add('is-open');
+      });
+    });
+
+    function closeModal() { overlay.classList.remove('is-open'); }
+
+    document.getElementById('closeKursAnmeldeModal').addEventListener('click', closeModal);
+    document.getElementById('kursAnmeldeSuccessClose').addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      errorEl.style.display = 'none';
+
+      var btn = form.querySelector('[type="submit"]');
+      btn.disabled    = true;
+      btn.textContent = 'Wird gesendet…';
+
+      try {
+        var res  = await fetch('/kurse/' + currentKursId + '/anmelden',
+                               { method: 'POST', body: new FormData(form) });
+        var data = await res.json();
+
+        if (data.success) {
+          formWrap.style.display    = 'none';
+          successWrap.style.display = 'block';
+          successText.textContent   = data.message;
+        } else {
+          errorEl.textContent   = data.message;
+          errorEl.style.display = 'block';
+        }
+      } catch (_) {
+        errorEl.textContent   = 'Netzwerkfehler – bitte versuche es erneut.';
+        errorEl.style.display = 'block';
+      } finally {
+        btn.disabled    = false;
+        btn.textContent = 'Platz sichern';
+      }
+    });
+  })();
+</script>
 {% endblock %}

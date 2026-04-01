@@ -5,6 +5,7 @@ from database import (
     get_alle_kurse,
     anmelden as db_anmelden,
     freie_plaetze_reduzieren,
+    mitglied_registrieren,
 )
 
 app = Flask(__name__)
@@ -67,6 +68,42 @@ def agb():
 
 
 # ── Anmeldung ────────────────────────────────────────────────
+
+@app.route('/mitglied-werden', methods=['POST'])
+def mitglied_werden():
+    vorname  = request.form.get('vorname',  '').strip()
+    nachname = request.form.get('nachname', '').strip()
+    email    = request.form.get('email',    '').strip()
+    telefon  = request.form.get('telefon',  '').strip() or None
+
+    if not vorname or not nachname or not email:
+        return jsonify({'success': False, 'message': 'Vorname, Nachname und E-Mail sind Pflichtfelder.'})
+
+    mitglied_registrieren(vorname, nachname, email, telefon, str(datetime.date.today()))
+    return jsonify({'success': True, 'message': f'Willkommen, {vorname}! Deine Anfrage ist eingegangen. Wir melden uns in Kürze.'})
+
+
+@app.route('/kurse/<int:id>/anmelden', methods=['POST'])
+def kurs_anmelden(id):
+    name  = request.form.get('name',  '').strip()
+    email = request.form.get('email', '').strip()
+
+    if not name or not email:
+        return jsonify({'success': False, 'message': 'Name und E-Mail sind Pflichtfelder.'})
+
+    conn = get_db()
+    kurs = conn.execute(
+        'SELECT * FROM kurse WHERE id = ? AND freie_plaetze > 0', (id,)
+    ).fetchone()
+    conn.close()
+
+    if kurs is None:
+        return jsonify({'success': False, 'message': 'Dieser Kurs ist leider ausgebucht.'})
+
+    db_anmelden(name, email, id, str(datetime.date.today()))
+    freie_plaetze_reduzieren(id)
+    return jsonify({'success': True, 'message': f'Du bist jetzt für "{kurs["name"]}" angemeldet. Wir freuen uns auf dich!'})
+
 
 @app.route('/anmelden', methods=['GET', 'POST'])
 def anmelden():
