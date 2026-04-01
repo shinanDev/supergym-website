@@ -11,9 +11,20 @@
       <p class="kurse-subtitle">Finde deinen Kurs — vom Einstieg bis zum nächsten Level.</p>
     </div>
 
-    <div class="kurse-grid">
+    <div class="kursplan-filter">
+  <button class="filter-btn filter-btn--active" data-tag="alle">Alle</button>
+  <button class="filter-btn" data-tag="Montag">Montag</button>
+  <button class="filter-btn" data-tag="Dienstag">Dienstag</button>
+  <button class="filter-btn" data-tag="Mittwoch">Mittwoch</button>
+  <button class="filter-btn" data-tag="Donnerstag">Donnerstag</button>
+  <button class="filter-btn" data-tag="Freitag">Freitag</button>
+  <button class="filter-btn" data-tag="Samstag">Samstag</button>
+  <button class="filter-btn" data-tag="Sonntag">Sonntag</button>
+</div>
+
+<div class="kurse-grid">
       {% for kurs in kurse %}
-      <article class="kurs-card {% if kurs.freie_plaetze == 0 %}kurs-card--ausgebucht{% endif %}">
+      <<article class="kurs-card {% if kurs.freie_plaetze == 0 %}kurs-card--ausgebucht{% endif %}" data-tag="{{ kurs.wochentag }}">
 
         <div class="kurs-card__head">
           <span class="kurs-badge kurs-badge--{{ kurs.niveau | lower | replace(' ', '-') }}">
@@ -43,13 +54,41 @@
         </ul>
 
         <!-- KURSDETAIL-LINK: href="/kurse/{{ kurs.id }}" — Isabel implementiert /kurse/<id> -->
-        <a href="/kurse/{{ kurs.id }}"
-           class="btn btn--primary kurs-card__cta {% if kurs.freie_plaetze == 0 %}kurs-card__cta--disabled{% endif %}"
-           {% if kurs.freie_plaetze == 0 %}aria-disabled="true" tabindex="-1"{% endif %}>
-          {% if kurs.freie_plaetze == 0 %}Warteliste{% else %}Jetzt anmelden{% endif %}
-        </a>
+        {% if kurs.freie_plaetze == 0 %}
+<div class="kurs-card__ausgebucht-hinweis">Kurs ausgebucht</div>
+<a href="/kurse/{{ kurs.id }}"
+   class="btn btn--primary kurs-card__cta kurs-card__cta--disabled"
+   aria-disabled="true" tabindex="-1"
+   onclick="return false;">
+  Ausgebucht
+</a>
+{% else %}
+<a href="/kurse/{{ kurs.id }}"
+   class="btn btn--primary kurs-card__cta">
+  Jetzt anmelden
+</a>
+{% endif %}
 
       </article>
+      <script>
+const buttons = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.kurs-card');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('filter-btn--active'));
+    btn.classList.add('filter-btn--active');
+    const tag = btn.dataset.tag;
+    cards.forEach(card => {
+      if (tag === 'alle' || card.dataset.tag === tag) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
       {% endfor %}
     </div>
 
