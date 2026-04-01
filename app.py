@@ -43,7 +43,7 @@ def kurs_details(id):
     conn.close()
     if kurs is None:
         return "Kurs nicht gefunden", 404
-    return render_template("kurse_details.html", kurs=kurs)
+    return render_template("kurs_detail.html", kurs=kurs)
 
 
 @app.route('/impressum')
