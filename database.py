@@ -70,3 +70,35 @@ def seed_db():
         )
         conn.commit()
     conn.close()
+
+
+def get_alle_kurse():
+    """Alle Kurse mit freien Plätzen — für das Anmelde-Dropdown."""
+    conn = get_db()
+    kurse = conn.execute(
+        'SELECT id, name, wochentag, uhrzeit FROM kurse WHERE freie_plaetze > 0 ORDER BY wochentag, uhrzeit'
+    ).fetchall()
+    conn.close()
+    return kurse
+
+
+def anmelden(name, email, kurs_id, datum):
+    """Neue Anmeldung in die Tabelle schreiben."""
+    conn = get_db()
+    conn.execute(
+        'INSERT INTO anmeldungen (name, email, kurs_id, datum) VALUES (?, ?, ?, ?)',
+        (name, email, kurs_id, datum)
+    )
+    conn.commit()
+    conn.close()
+
+
+def freie_plaetze_reduzieren(kurs_id):
+    """Freie Plätze um 1 senken — Guard: nie unter 0."""
+    conn = get_db()
+    conn.execute(
+        'UPDATE kurse SET freie_plaetze = freie_plaetze - 1 WHERE id = ? AND freie_plaetze > 0',
+        (kurs_id,)
+    )
+    conn.commit()
+    conn.close()

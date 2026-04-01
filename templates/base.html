@@ -159,7 +159,7 @@
     <div class="hero__overlay">
       <h1 class="hero__title">TRAIN HARD. <span>STAY SHARP.</span></h1>
       <p class="hero__sub">SuperGym Hamburg – Dein Fitnessstudio im Herzen der Stadt</p>
-      <a href="#" class="hero__btn">Jetzt anmelden</a>
+      <button type="button" class="hero__btn" id="openAnmeldeModal">Jetzt anmelden</button>
     </div>
   </header>
 
@@ -183,6 +183,7 @@
       <li><a href="{{ url_for('kurse') }}" class="navbar__link {% if request.endpoint == 'kurse' %}navbar__link--active{% endif %}">Kurse</a></li>
       <li><a href="{{ url_for('ueber_uns') }}" class="navbar__link {% if request.endpoint == 'ueber_uns' %}navbar__link--active{% endif %}">Über uns</a></li>
     </ul>
+    <button type="button" class="btn btn--primary navbar__cta" id="openAnmeldeModalNav">Anmelden</button>
   </nav>
 
   <section class="carousel-container">
@@ -397,6 +398,117 @@
       formContainer.style.display = 'none';
       successMsg.style.display = 'block';
     });
+  </script>
+
+  <!-- ── ANMELDE-MODAL ────────────────────────────────────── -->
+  <div class="modal-overlay" id="anmeldeModal" role="dialog" aria-modal="true" aria-labelledby="anmeldeModalTitle">
+    <div class="modal-box anmelde-modal__box">
+      <button class="modal-close" id="closeAnmeldeModal" aria-label="Schließen">&times;</button>
+
+      <!-- Formular-Ansicht -->
+      <div id="anmeldeFormContainer">
+        <p class="anmelde-modal__label">MITGLIED WERDEN</p>
+        <h3 class="modal-title" id="anmeldeModalTitle">Kurs <span class="accent">anmelden</span></h3>
+
+        <form id="anmeldeForm" class="modal-form" novalidate>
+          <input
+            type="text"
+            name="name"
+            id="anmeldeName"
+            class="modal-form__input"
+            placeholder="Dein Name"
+            required
+            autocomplete="name"
+          />
+          <input
+            type="email"
+            name="email"
+            id="anmeldeEmail"
+            class="modal-form__input"
+            placeholder="Deine E-Mail"
+            required
+            autocomplete="email"
+          />
+          <select name="kurs_id" id="anmeldeKurs" class="modal-form__input modal-form__select" required>
+            <option value="">— Kurs wählen —</option>
+            {% for k in anmelde_kurse %}
+            <option value="{{ k.id }}">{{ k.name }} · {{ k.wochentag }} {{ k.uhrzeit }} Uhr</option>
+            {% endfor %}
+          </select>
+
+          <p id="anmeldeError" class="anmelde-modal__error" style="display:none;"></p>
+
+          <button type="submit" class="btn btn--primary anmelde-modal__submit">Platz sichern</button>
+        </form>
+      </div>
+
+      <!-- Erfolgs-Ansicht -->
+      <div id="anmeldeSuccess" style="display:none;">
+        <div class="anmelde-modal__success-icon">✓</div>
+        <h3 class="anmelde-modal__success-title">Anmeldung bestätigt!</h3>
+        <p id="anmeldeSuccessText" class="anmelde-modal__success-text"></p>
+        <button type="button" class="btn btn--primary" id="anmeldeSuccessClose" style="margin-top:1.5rem;">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const overlay   = document.getElementById('anmeldeModal');
+      const formWrap  = document.getElementById('anmeldeFormContainer');
+      const successWrap = document.getElementById('anmeldeSuccess');
+      const form      = document.getElementById('anmeldeForm');
+      const errorEl   = document.getElementById('anmeldeError');
+      const successText = document.getElementById('anmeldeSuccessText');
+
+      // Öffner: Navbar-Button, Hero-Button
+      function openModal() {
+        formWrap.style.display  = 'block';
+        successWrap.style.display = 'none';
+        errorEl.style.display   = 'none';
+        form.reset();
+        overlay.classList.add('is-open');
+      }
+
+      document.getElementById('openAnmeldeModalNav').addEventListener('click', openModal);
+      document.getElementById('openAnmeldeModal').addEventListener('click', openModal);
+
+      // Schließen
+      function closeModal() { overlay.classList.remove('is-open'); }
+      document.getElementById('closeAnmeldeModal').addEventListener('click', closeModal);
+      document.getElementById('anmeldeSuccessClose').addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+
+      // Formular absenden via fetch → POST /anmelden
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorEl.style.display = 'none';
+
+        const submitBtn = form.querySelector('[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wird gesendet…';
+
+        try {
+          const res  = await fetch('/anmelden', { method: 'POST', body: new FormData(form) });
+          const data = await res.json();
+
+          if (data.success) {
+            formWrap.style.display    = 'none';
+            successWrap.style.display = 'block';
+            successText.textContent   = `Du bist jetzt für "${data.kursname}" angemeldet. Wir freuen uns auf dich!`;
+          } else {
+            errorEl.textContent     = data.error;
+            errorEl.style.display   = 'block';
+          }
+        } catch {
+          errorEl.textContent   = 'Netzwerkfehler – bitte versuche es erneut.';
+          errorEl.style.display = 'block';
+        } finally {
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Platz sichern';
+        }
+      });
+    })();
   </script>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

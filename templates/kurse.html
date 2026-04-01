@@ -36,13 +36,10 @@
         </div>
 
         <h2 class="kurs-card__name">{{ kurs.name }}</h2>
-        <p class="kurs-card__desc">{{ kurs.beschreibung }}</p>
 
         <ul class="kurs-card__meta">
           <li><span class="kurs-card__meta-label">Tag</span>{{ kurs.wochentag }}</li>
           <li><span class="kurs-card__meta-label">Zeit</span>{{ kurs.uhrzeit }} Uhr</li>
-          <li><span class="kurs-card__meta-label">Dauer</span>{{ kurs.dauer }} Min</li>
-          <li><span class="kurs-card__meta-label">Trainer</span>{{ kurs.trainer }}</li>
           <li>
             <span class="kurs-card__meta-label">Plätze</span>
             {% if kurs.freie_plaetze == 0 %}
@@ -53,6 +50,7 @@
           </li>
         </ul>
 
+<<<<<<< HEAD
         <!-- KURSDETAIL-LINK: href="/kurse/{{ kurs.id }}" — Isabel implementiert /kurse/<id> -->
         {% if kurs.freie_plaetze == 0 %}
 <div class="kurs-card__ausgebucht-hinweis">Kurs ausgebucht</div>
@@ -68,6 +66,20 @@
   Jetzt anmelden
 </a>
 {% endif %}
+=======
+        <button type="button" class="btn btn--primary kurs-card__cta open-kurs-modal"
+          data-name="{{ kurs.name }}"
+          data-beschreibung="{{ kurs.beschreibung }}"
+          data-trainer="{{ kurs.trainer }}"
+          data-niveau="{{ kurs.niveau }}"
+          data-dauer="{{ kurs.dauer }}"
+          data-wochentag="{{ kurs.wochentag }}"
+          data-uhrzeit="{{ kurs.uhrzeit }}"
+          data-kapazitaet="{{ kurs.kapazitaet }}"
+          data-freie="{{ kurs.freie_plaetze }}">
+          Details ansehen
+        </button>
+>>>>>>> origin/main
 
       </article>
       <script>
@@ -94,4 +106,95 @@ buttons.forEach(btn => {
 
   </div>
 </section>
+
+<div class="modal-overlay" id="kursModal">
+  <div class="modal-box" style="max-width: 500px; padding: 2.5rem; position: relative;">
+    <button class="modal-close" id="closeKursModal" style="z-index: 10;">&times;</button>
+    
+    <div style="display: flex; flex-direction: column;">
+      <span id="modalKursNiveauDauer" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent);">Niveau | Dauer</span>
+      <h2 id="modalKursName" style="font-size: 1.75rem; font-weight: 900; text-transform: uppercase; color: var(--color-subtle); line-height: 1.1; margin-top: 0.5rem; margin-bottom: 1rem;">Kurs Name</h2>
+      
+      <p id="modalKursDesc" style="font-size: 0.95rem; color: var(--color-text); line-height: 1.6; margin-bottom: 1.5rem;"></p>
+      
+      <div style="padding: 1rem; background-color: rgba(255,255,255,0.03); border-left: 3px solid var(--color-accent); margin-bottom: 1.5rem;">
+        
+        <p style="margin-bottom: 0.25rem; font-size: 0.9rem;">
+          <strong>Trainer:</strong> 
+          <a href="{{ url_for('ueber_uns') }}" id="modalKursTrainer" class="accent" style="text-decoration: underline; text-underline-offset: 3px;">Trainer</a>
+        </p>
+        
+        <p style="margin-bottom: 0.25rem; font-size: 0.9rem;"><strong>Wann:</strong> <span id="modalKursWann">Wann</span></p>
+        <p style="font-size: 0.9rem;"><strong>Kapazität:</strong> <span id="modalKursKapazitaet">Kapazität</span></p>
+      </div>
+
+      <div id="modalKursAction">
+         </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const kursModal = document.getElementById('kursModal');
+  const closeKursModalBtn = document.getElementById('closeKursModal');
+  const detailButtons = document.querySelectorAll('.open-kurs-modal');
+
+  // Die Elemente im Pop-up
+  const mNiveauDauer = document.getElementById('modalKursNiveauDauer');
+  const mName = document.getElementById('modalKursName');
+  const mDesc = document.getElementById('modalKursDesc');
+  const mTrainer = document.getElementById('modalKursTrainer');
+  const mWann = document.getElementById('modalKursWann');
+  const mKap = document.getElementById('modalKursKapazitaet');
+  const mAction = document.getElementById('modalKursAction');
+
+  detailButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Daten aus dem Button holen
+      const name = btn.dataset.name;
+      const trainerName = btn.dataset.trainer;
+      const freie = parseInt(btn.dataset.freie);
+
+      // 2. Texte im Pop-up austauschen
+      mName.textContent = name;
+      mNiveauDauer.textContent = `${btn.dataset.niveau} | ${btn.dataset.dauer} Minuten`;
+      mDesc.textContent = btn.dataset.beschreibung;
+      mWann.textContent = `${btn.dataset.wochentag}s, ${btn.dataset.uhrzeit} Uhr`;
+      mKap.textContent = `Maximal ${btn.dataset.kapazitaet} Teilnehmer`;
+
+      // 3. Trainer-Link anpassen (JETZT SICHER OHNE REGEX-FEHLER!)
+      mTrainer.textContent = trainerName;
+      // Macht aus "Alex Petrov" absolut sicher "alex-petrov"
+      const trainerId = trainerName.toLowerCase().split(' ').join('-'); 
+      mTrainer.href = `/about#${trainerId}`;
+
+      // 4. Anmelde-Button Logik
+      if (freie > 0) {
+        mAction.innerHTML = `
+          <a href="#" class="btn btn--primary" style="width: 100%; text-align: center;">Jetzt Platz sichern</a>
+          <p style="text-align: center; margin-top: 0.5rem; font-size: 0.8rem; color: var(--color-subtle);">Noch ${freie} Plätze frei!</p>
+        `;
+      } else {
+        mAction.innerHTML = `
+          <button class="btn btn--ghost" disabled style="width: 100%; cursor: not-allowed; opacity: 0.5;">Ausgebucht</button>
+        `;
+      }
+
+      // 5. Pop-up öffnen
+      kursModal.classList.add('is-open');
+    });
+  });
+
+  // Schließen per Button
+  closeKursModalBtn.addEventListener('click', () => {
+    kursModal.classList.remove('is-open');
+  });
+
+  // Schließen per Klick auf Hintergrund
+  window.addEventListener('click', (e) => {
+    if (e.target === kursModal) {
+      kursModal.classList.remove('is-open');
+    }
+  });
+</script>
 {% endblock %}

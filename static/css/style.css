@@ -1134,53 +1134,91 @@ ul {
   border-color: #333;
   pointer-events: none;
 }
-/* ============================================================
-   KURSPLAN FILTER
-   ============================================================ */
-.kursplan-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 32px;
+
+
+/* ------------------------------------------------------------
+   NAVBAR — CTA Button
+   ------------------------------------------------------------ */
+.navbar__cta {
+  margin-left: auto;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
 }
 
-.filter-btn {
-  background-color: #1a1a1a;
-  color: #ffffff;
-  border: 1px solid #333;
-  padding: 10px 20px;
-  font-size: 0.875rem;
-  font-weight: 600;
+@media (max-width: 768px) {
+  .navbar__cta {
+    display: none; /* Im Mobile-Menü nicht nötig, Hero-Button reicht */
+  }
+}
+
+
+/* ------------------------------------------------------------
+   ANMELDE-MODAL — spezifische Erweiterungen
+   ------------------------------------------------------------ */
+.anmelde-modal__box {
+  border-top: 3px solid var(--color-accent);
+}
+
+.anmelde-modal__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
   text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.modal-form__select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
   cursor: pointer;
 }
 
-.filter-btn:hover {
-  border-color: #F5FF40;
-  color: #F5FF40;
+.modal-form__select option {
+  background: #1A1A1A;
+  color: var(--color-text);
 }
 
-.filter-btn--active {
-  background-color: #F5FF40;
-  color: #000000;
-  border-color: #F5FF40;
-}/* ============================================================
-   AUSGEBUCHT HINWEIS
-   ============================================================ */
-.kurs-card__ausgebucht-hinweis {
-  background-color: #333;
-  color: #ffffff;
-  padding: 8px 16px;
-  font-size: 0.875rem;
-  font-weight: 600;
+.anmelde-modal__error {
+  color: #ef5350;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 2px solid #ef5350;
+  background: rgba(239, 83, 80, 0.08);
+}
+
+.anmelde-modal__submit {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+/* Erfolgs-Ansicht */
+.anmelde-modal__success-icon {
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid #4caf50;
+  color: #4caf50;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.anmelde-modal__success-title {
+  font-size: 1.25rem;
+  font-weight: 900;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  color: #4caf50;
+  margin-bottom: 0.5rem;
 }
 
-.kurs-card__cta--disabled {
-  background-color: #333;
-  color: #888;
-  cursor: not-allowed;
-  border-color: #333;
-  pointer-events: none;
+.anmelde-modal__success-text {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.6;
 }
