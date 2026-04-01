@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ kurs.name }} — SuperGym Hamburg{% endblock %}
+{% block content %}
+<section class="main container">
+  <a href="/kurse" class="btn btn--ghost" style="margin-bottom:2rem;">← Zurück</a>
+  <h1 style="color:var(--color-subtle);text-transform:uppercase;">{{ kurs.name }}</h1>
+  <p style="color:var(--color-accent);margin:0.5rem 0;">{{ kurs.niveau }} | {{ kurs.dauer }} Min.</p>
+  <p style="margin:1rem 0;">{{ kurs.beschreibung }}</p>
+  <ul style="list-style:none;margin:1rem 0;display:flex;gap:2rem;">
+    <li><strong>Tag:</strong> {{ kurs.wochentag }}</li>
+    <li><strong>Zeit:</strong> {{ kurs.uhrzeit }} Uhr</li>
+    <li><strong>Trainer:</strong> {{ kurs.trainer }}</li>
+  </ul>
+  {% if kurs.freie_plaetze == 0 %}
+    <p style="color:red;">Kurs ausgebucht</p>
+  {% else %}
+    <a href="/kurse/{{ kurs.id }}/anmelden" class="btn btn--primary">Jetzt anmelden</a>
+  {% endif %}
+</section>
+{% endblock %}
