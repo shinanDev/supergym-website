@@ -50,7 +50,6 @@
           </li>
         </ul>
 
-<<<<<<< HEAD
         <!-- KURSDETAIL-LINK: href="/kurse/{{ kurs.id }}" — Isabel implementiert /kurse/<id> -->
         {% if kurs.freie_plaetze == 0 %}
 <div class="kurs-card__ausgebucht-hinweis">Kurs ausgebucht</div>
@@ -66,8 +65,6 @@
   Jetzt anmelden
 </a>
 {% endif %}
-=======
-        <button type="button" class="btn btn--primary kurs-card__cta open-kurs-modal"
           data-name="{{ kurs.name }}"
           data-beschreibung="{{ kurs.beschreibung }}"
           data-trainer="{{ kurs.trainer }}"
@@ -79,9 +76,7 @@
           data-freie="{{ kurs.freie_plaetze }}">
           Details ansehen
         </button>
->>>>>>> origin/main
 
-      </article>
       <script>
 const buttons = document.querySelectorAll('.filter-btn');
 const cards = document.querySelectorAll('.kurs-card');
