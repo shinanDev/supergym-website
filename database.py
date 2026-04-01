@@ -46,16 +46,16 @@ def seed_db():
             '''INSERT INTO kurse (name, beschreibung, niveau, wochentag, uhrzeit, dauer, trainer, kapazitaet, freie_plaetze)
                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''',
             [
-                ('HIIT Burn',          'Hochintensives Intervalltraining für maximale Fettverbrennung.', 'Fortgeschritten', 'Montag',    '18:00', 45, 'Alex Petrov',    20, 8),
-                ('Yoga Flow',          'Fließende Yoga-Sequenzen für Flexibilität und innere Ruhe.',    'Alle Level',      'Montag',    '10:00', 60, 'Lena Hartmann',  15, 5),
-                ('Kraftzirkel',        'Ganzkörper-Krafttraining im Zirkel-Format.',                    'Mittel',          'Dienstag',  '17:00', 50, 'Alex Petrov',    18, 12),
-                ('Kickbox Cardio',     'Boxtechnik trifft Ausdauer.',                                  'Alle Level',      'Dienstag',  '19:00', 60, 'Marco da Silva', 16, 3),
-                ('Morning Stretch',    'Sanftes Dehnen zum Start in den Tag.',                          'Anfänger',        'Mittwoch',  '07:30', 30, 'Lena Hartmann',  12, 7),
-                ('Power Lifting Basics','Kniebeugen, Kreuzheben, Bankdrücken.',                        'Anfänger',        'Mittwoch',  '18:00', 60, 'Alex Petrov',    10, 2),
-                ('Yoga Deep',          'Tiefe Dehnungen und Regeneration.',                             'Alle Level',      'Donnerstag','10:00', 75, 'Lena Hartmann',  15, 10),
-                ('Fight Fit',          'Intensives Kampfsport-Workout.',                                'Fortgeschritten', 'Donnerstag','19:00', 60, 'Marco da Silva', 16, 0),
-                ('HIIT Express',       'Kompaktes HIIT in 30 Minuten.',                                'Mittel',          'Freitag',   '12:00', 30, 'Alex Petrov',    20, 14),
-                ('Weekend Warrior',    'Samstags-Special: Mixed Workout.',                              'Alle Level',      'Samstag',   '10:00', 75, 'Marco da Silva', 20, 6),
+                ('HIIT Burn',          'Hochintensives Intervalltraining für maximale Fettverbrennung. 30 Sekunden Belastung, 15 Sekunden Pause — 45 Minuten volle Power.', 'Fortgeschritten', 'Montag',    '18:00', 45, 'Alex Petrov',    20, 8),
+                ('Yoga Flow',          'Fließende Yoga-Sequenzen für Flexibilität und innere Ruhe. Für alle Level geeignet.',    'Alle Level',      'Montag',    '10:00', 60, 'Lena Hartmann',  15, 5),
+                ('Kraftzirkel',        'Ganzkörper-Krafttraining im Zirkel-Format. 8 Stationen, 3 Runden — effektiv und zeitsparend.',                    'Mittel',          'Dienstag',  '17:00', 50, 'Alex Petrov',    18, 12),
+                ('Kickbox Cardio',     'Boxtechnik trifft Ausdauer: Jab, Cross, Hook kombiniert mit Cardio-Intervallen. Handschuhe werden gestellt.',                                  'Alle Level',      'Dienstag',  '19:00', 60, 'Marco da Silva', 16, 3),
+                ('Morning Stretch',    'Sanftes Dehnen und Mobility-Arbeit zum Start in den Tag. Ideal als Ergänzung zum Krafttraining.',                          'Anfänger',        'Mittwoch',  '07:30', 30, 'Lena Hartmann',  12, 7),
+                ('Power Lifting Basics','Kniebeugen, Kreuzheben, Bankdrücken — die drei großen Lifts sauber lernen. Technik vor Gewicht.',                        'Anfänger',        'Mittwoch',  '18:00', 60, 'Alex Petrov',    10, 2),
+                ('Yoga Deep',          'Tiefe Dehnungen und längeres Halten der Positionen. Regeneration für Körper und Geist.',                             'Alle Level',      'Donnerstag','10:00', 75, 'Lena Hartmann',  15, 10),
+                ('Fight Fit',          'Intensives Kampfsport-Workout mit Elementen aus Boxen, Kickboxen und Bodyweight-Training.',                                'Fortgeschritten', 'Donnerstag','19:00', 60, 'Marco da Silva', 16, 0),
+                ('HIIT Express',       'Kompaktes HIIT in 30 Minuten — perfekt für die Mittagspause. Kurz, knackig, effektiv.',                                'Mittel',          'Freitag',   '12:00', 30, 'Alex Petrov',    20, 14),
+                ('Weekend Warrior',    'Samstags-Special: Mixed Workout aus Kraft, Cardio und Mobility. Der perfekte Wochenstart.',                              'Alle Level',      'Samstag',   '10:00', 75, 'Marco da Silva', 20, 6),
             ]
         )
         conn.executemany(
