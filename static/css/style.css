@@ -432,6 +432,9 @@ ul {
 }
 
 .hero__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
   font-size: 3rem;
   font-weight: 900;
   color: #F5FF40;
@@ -1610,4 +1613,16 @@ ul {
   font-size: 0.9rem;
   color: var(--color-text);
   line-height: 1.6;
+}
+
+
+/* ------------------------------------------------------------
+   HERO — Hantel-Icon neben Slogan
+   ------------------------------------------------------------ */
+.slogan-icon {
+  height: 1.4em;
+  width: auto;
+  flex-shrink: 0;
+  transform: rotate(-20deg);
+  filter: brightness(0) saturate(100%) invert(96%) sepia(47%) saturate(800%) hue-rotate(8deg);
 }
